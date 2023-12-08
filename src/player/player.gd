@@ -13,6 +13,8 @@ extends CharacterBody2D
 
 @export var dash_speed := 1000.0
 
+var direction := Vector2.ZERO
+
 var weapon_rotation := 0.0
 
 
@@ -25,11 +27,10 @@ func get_move_input() -> Vector2:
 
 #region Normal State
 func _on_normal_state_physics_processing(delta: float) -> void:
-	var direction := get_move_input()
+	direction = get_move_input()
 	
 	if direction.length() > 0:
 		if Input.is_action_just_pressed('dash'):
-			velocity = direction.normalized() * dash_speed
 			state_chart.send_event('dash')
 			return
 		
@@ -50,6 +51,13 @@ func _on_attack_state_entered() -> void:
 	weapon_collision.disabled = false
 
 
+func _on_attack_state_unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed('dash'):
+		direction = get_move_input()
+		state_chart.send_event('dash')
+		get_viewport().set_input_as_handled()
+
+
 func _on_attack_state_exited() -> void:
 	weapon_collision.disabled = true
 #endregion
@@ -57,6 +65,7 @@ func _on_attack_state_exited() -> void:
 
 #region Dash State
 func _on_dash_state_entered() -> void:
+	velocity = direction.normalized() * dash_speed
 	trail_manager.summon_trail(4, 0.3)
 
 

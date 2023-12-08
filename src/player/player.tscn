@@ -75,6 +75,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
 delay_seconds = 0.2
 
+[node name="ToDash" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Dash")
+event = &"dash"
+
 [node name="Dash" type="Node" parent="StateChart/Root"]
 script = ExtResource("5_apxxk")
 
@@ -86,5 +91,6 @@ delay_seconds = 0.3
 [connection signal="state_physics_processing" from="StateChart/Root/Normal" to="." method="_on_normal_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attack" to="." method="_on_attack_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Attack" to="." method="_on_attack_state_exited"]
+[connection signal="state_unhandled_input" from="StateChart/Root/Attack" to="." method="_on_attack_state_unhandled_input"]
 [connection signal="state_entered" from="StateChart/Root/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Dash" to="." method="_on_dash_state_physics_processing"]
