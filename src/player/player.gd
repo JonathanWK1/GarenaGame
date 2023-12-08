@@ -29,9 +29,10 @@ func get_move_input() -> Vector2:
 
 #region Normal State
 func _on_normal_state_physics_processing(delta: float) -> void:
-	direction = get_move_input()
+	var input_direction := get_move_input()
 	
-	if direction.length() > 0:
+	if input_direction.length() > 0:
+		direction = input_direction
 		if Input.is_action_just_pressed('dash'):
 			state_chart.send_event('dash')
 			return
@@ -40,6 +41,7 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 		animator.play_8_way_anim('walk', direction)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
+		animator.play_8_way_anim('idle', direction)
 	move_and_slide()
 	
 	if Input.is_action_just_pressed('attack'):
@@ -68,6 +70,7 @@ func _on_attack_state_exited() -> void:
 
 #region Dash State
 func _on_dash_state_entered() -> void:
+	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
 	trail_manager.summon_trail(4, 0.3)
 
