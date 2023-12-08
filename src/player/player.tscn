@@ -1,42 +1,160 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=19 format=3 uid="uid://ccl0sxy7wkbj6"]
 
-[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_6gbsk"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
+[ext_resource type="Texture2D" uid="uid://dben1vlab3evo" path="res://assets/images/player_walk.png" id="3_7wrg0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_regu6"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_qfqkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_apxxk"]
+[ext_resource type="Script" path="res://src/player/player_animator.gd" id="5_qqw3h"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_jtndr"]
 [ext_resource type="Script" path="res://src/ghost_trail/trail_manager.gd" id="7_inbgf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4pkr"]
-radius = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v30dy"]
+radius = 12.0
+height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v3640"]
-radius = 64.0
-height = 192.0
+radius = 20.0
+height = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "weapon_pivot", "weapon_collision")]
+[sub_resource type="Animation" id="Animation_qai01"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_psnkr"]
+resource_name = "walk_S"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_5h400"]
+resource_name = "walk_W"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_xdjoa"]
+resource_name = "walk_E"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_w0sy2"]
+resource_name = "walk_N"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10qrs"]
+_data = {
+"RESET": SubResource("Animation_qai01"),
+"walk_E": SubResource("Animation_xdjoa"),
+"walk_N": SubResource("Animation_w0sy2"),
+"walk_S": SubResource("Animation_psnkr"),
+"walk_W": SubResource("Animation_5h400")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "weapon_pivot", "weapon_collision")]
 motion_mode = 1
 script = ExtResource("1_ur3fd")
 state_chart = NodePath("StateChart")
 trail_manager = NodePath("TrailManager")
+animator = NodePath("PlayerAnimator")
 health = ExtResource("2_7j3iq")
 weapon_pivot = NodePath("WeaponPivot")
 weapon_collision = NodePath("WeaponPivot/HitBox/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6gbsk")
+position = Vector2(0, -29)
+texture = ExtResource("3_7wrg0")
+hframes = 10
+vframes = 4
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_w4pkr")
 metadata/_edit_lock_ = true
 
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_v30dy")
+
 [node name="WeaponPivot" type="Marker2D" parent="."]
+position = Vector2(0, -25)
+rotation = 0.837758
 
 [node name="HitBox" type="Area2D" parent="WeaponPivot"]
-position = Vector2(90, 0)
+position = Vector2(32, 0)
+collision_layer = 0
+collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/HitBox"]
@@ -48,6 +166,16 @@ metadata/_edit_lock_ = true
 script = ExtResource("7_inbgf")
 body = NodePath("..")
 real_sprite = NodePath("../Sprite2D")
+
+[node name="PlayerAnimator" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("5_qqw3h")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_10qrs")
+}
+speed_scale = 0.5
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_regu6")

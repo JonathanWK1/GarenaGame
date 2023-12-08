@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager
+@export var animator: PlayerAnimator
 @export var health: Health
 
 @export var weapon_pivot: Marker2D
@@ -36,6 +37,7 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 			return
 		
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
+		animator.play_8_way_anim('walk', direction)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	move_and_slide()
