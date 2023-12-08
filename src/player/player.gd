@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 @export var state_chart: StateChart
+@export var trail_manager: TrailManager
 
 @export var weapon_pivot: Marker2D
 @export var weapon_collision: CollisionShape2D
@@ -9,6 +10,8 @@ extends CharacterBody2D
 @export var speed := 350.0
 @export var friction := 0.8
 @export var acceleration := 0.9
+
+@export var dash_speed := 1000.0
 
 var weapon_rotation := 0.0
 
@@ -25,6 +28,11 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 	var direction := get_move_input()
 	
 	if direction.length() > 0:
+		if Input.is_action_just_pressed('dash'):
+			velocity = direction.normalized() * dash_speed
+			state_chart.send_event('dash')
+			return
+		
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
@@ -47,3 +55,11 @@ func _on_attack_state_exited() -> void:
 #endregion
 
 
+#region Dash State
+func _on_dash_state_entered() -> void:
+	trail_manager.summon_trail(4, 0.3)
+
+
+func _on_dash_state_physics_processing(delta: float) -> void:
+	move_and_slide()
+#endregion
