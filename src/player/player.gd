@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager
+@export var health: Health
 
 @export var weapon_pivot: Marker2D
 @export var weapon_collision: CollisionShape2D

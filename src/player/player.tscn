@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=11 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_6gbsk"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
+[ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_regu6"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_qfqkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_apxxk"]
@@ -20,6 +21,7 @@ motion_mode = 1
 script = ExtResource("1_ur3fd")
 state_chart = NodePath("StateChart")
 trail_manager = NodePath("TrailManager")
+health = ExtResource("2_7j3iq")
 weapon_pivot = NodePath("WeaponPivot")
 weapon_collision = NodePath("WeaponPivot/HitBox/CollisionShape2D")
 
