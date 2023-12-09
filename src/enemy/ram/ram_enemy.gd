@@ -3,6 +3,7 @@ extends Enemy
 
 @export var state_chart: StateChart
 @export var animator: Animator
+@export var hitbox: HitBox
 
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
@@ -16,7 +17,9 @@ func _ready() -> void:
 
 #region Idle State
 func _on_idle_state_entered() -> void:
-	velocity = Vector2.RIGHT.rotated(randf_range(-PI, PI)) * idle_speed
+	var direction := Vector2.RIGHT.rotated(randf_range(-PI, PI))
+	animator.play_8_way_anim('walk', direction)
+	velocity = direction * idle_speed
 	await get_tree().create_timer(randf_range(3, 5)).timeout
 	state_chart.send_event('idle_finished')
 
@@ -26,15 +29,19 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 #endregion
 
 
+#region Charging State
 func _on_charging_state_entered() -> void:
-	print("CHARGING")
+	animator.play_8_way_anim('charging', target.global_position - global_position)
+#endregion
 
 
 #region Ram State
 func _on_ram_state_entered() -> void:
-	var v2 = target.global_position - global_position
-	var angle = v2.angle()
+	var v2 := target.global_position - global_position
+	var angle := v2.angle()
+	animator.play_8_way_anim('ram', v2)
 	velocity = Vector2.RIGHT.rotated(angle) * ram_speed
+	hitbox.enable()
 
 
 func _on_ram_state_physics_processing(delta: float) -> void:
@@ -43,7 +50,7 @@ func _on_ram_state_physics_processing(delta: float) -> void:
 
 
 func _on_ram_state_exited() -> void:
-	pass # Replace with function body.
+	hitbox.disable()
 #endregion
 
 
