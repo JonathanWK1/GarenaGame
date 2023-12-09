@@ -1,5 +1,7 @@
 extends Enemy
 
+class_name RamEnemy
+
 
 @export var sprite_shader: ShaderMaterial
 

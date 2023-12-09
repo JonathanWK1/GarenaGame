@@ -6,8 +6,8 @@
 
 [node name="CCTV" type="Node2D" node_paths=PackedStringArray("laser")]
 script = ExtResource("1_2tiow")
-rotation_speed = 40.0
 laser = NodePath("BigLaser")
+rotation_speed = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 0.25)
@@ -16,7 +16,7 @@ texture = ExtResource("1_ivlxu")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 32
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
@@ -37,5 +37,5 @@ width = 0.0
 default_color = Color(2, 0, 1, 1)
 end_cap_mode = 2
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

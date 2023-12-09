@@ -14,9 +14,8 @@ size = Vector2(128, 128)
 script = ExtResource("1_4swqg")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 128
 collision_mask = 128
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_al5wt")
@@ -33,5 +32,5 @@ texture = ExtResource("2_288nl")
 emitting = false
 one_shot = true
 
-[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="finished" from="HitParticle" to="." method="_on_hit_particle_finished"]
