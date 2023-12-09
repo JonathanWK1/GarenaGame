@@ -21,6 +21,8 @@ class_name Player
 
 @export var dash_speed := 1000.0
 
+@onready var trigger_speaker_collision := $TriggerAreaSpeaker/CollisionShape2D
+
 var direction := Vector2.ZERO
 var attacked_direction := Vector2.ZERO
 
@@ -30,6 +32,16 @@ var attack_queue := false
 
 var can_dash := true
 
+func _ready():
+	GlobalSignal.broadcast_player.emit(self)
+	GlobalSignal.arena_entered.connect(disable_trigger_speaker)
+	GlobalSignal.arena_finished.connect(enable_trigger_speaker)
+
+func disable_trigger_speaker(arena):
+	trigger_speaker_collision.set_deferred("disabled",true)
+
+func enable_trigger_speaker():
+	trigger_speaker_collision.set_deferred("disabled",false)
 
 func get_move_input() -> Vector2:
 	return Vector2(
@@ -182,3 +194,6 @@ func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
 	await get_tree().create_timer(0.05).timeout
 	sprite_shader.set_shader_parameter('flash_modifier', 0.0)
 
+func reset_player():
+	health.reset_health()
+	enable_trigger_speaker()

@@ -1,15 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=5 format=3 uid="uid://bq5ts738kbc3x"]
 
 [ext_resource type="Script" path="res://src/game_world.gd" id="1_2amqc"]
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
 [ext_resource type="PackedScene" uid="uid://brrg3g311unsc" path="res://src/tile_map/map.tscn" id="1_semrt"]
-[ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="2_x1m5l"]
-[ext_resource type="PackedScene" uid="uid://dptcg7pk21lxl" path="res://src/arena/arena.tscn" id="3_da2vo"]
-[ext_resource type="PackedScene" uid="uid://binqsx11r7f0n" path="res://src/enemy/ram/ram_enemy.tscn" id="3_xcidh"]
-[ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_p808p"]
-[ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="5_7oqqq"]
 [ext_resource type="Script" path="res://src/Camera/Camera2D.gd" id="7_s6o3i"]
-[ext_resource type="PackedScene" uid="uid://dtixyf24bjjg8" path="res://src/enemy/cctv/cctv.tscn" id="10_hhpuc"]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_2amqc")
@@ -17,39 +11,18 @@ script = ExtResource("1_2amqc")
 [node name="Map" parent="." instance=ExtResource("1_semrt")]
 
 [node name="Player" parent="." instance=ExtResource("1_86jyw")]
-
-[node name="Speaker" parent="." instance=ExtResource("2_x1m5l")]
-position = Vector2(177, 21)
-
-[node name="Speaker2" parent="." instance=ExtResource("2_x1m5l")]
-position = Vector2(-157, 67)
-
-[node name="Arena" parent="." node_paths=PackedStringArray("spawners") instance=ExtResource("3_da2vo")]
-position = Vector2(2985, -1370)
-spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3")]
-
-[node name="EnemySpawner" type="Marker2D" parent="Arena"]
-position = Vector2(-103, 178)
-script = ExtResource("4_p808p")
-enemy_scn = ExtResource("5_7oqqq")
-
-[node name="EnemySpawner2" type="Marker2D" parent="Arena"]
-position = Vector2(177, 10)
-script = ExtResource("4_p808p")
-enemy_scn = ExtResource("3_xcidh")
-
-[node name="EnemySpawner3" type="Marker2D" parent="Arena"]
-position = Vector2(-127, -40)
-script = ExtResource("4_p808p")
-enemy_scn = ExtResource("3_xcidh")
+position = Vector2(923, 714)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(904, 875)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("7_s6o3i")
 player = NodePath("../Player")
 
-[node name="CCTV" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_hhpuc")]
-position = Vector2(1667, 258)
-rotation = 1.5708
-player = NodePath("../Player")
+[node name="Timer" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

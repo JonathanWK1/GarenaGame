@@ -6,10 +6,12 @@
 
 [node name="CCTV" type="Node2D" node_paths=PackedStringArray("laser")]
 script = ExtResource("1_2tiow")
+rotation_speed = 40.0
 laser = NodePath("BigLaser")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 0.25)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("1_ivlxu")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -18,6 +20,8 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0.999998, -3)
+scale = Vector2(1.24512, 1.26492)
 polygon = PackedVector2Array(0, 0, 256, 0, 248, 64, 224, 128, 192, 168, 168, 192, 128, 224, 64, 248, 0, 256)
 
 [node name="BigLaser" type="RayCast2D" parent="."]
