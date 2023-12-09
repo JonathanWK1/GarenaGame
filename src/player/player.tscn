@@ -1177,6 +1177,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Parry")
 event = &"parry"
 
+[node name="ToStagger" type="Node" parent="StateChart/ParallelState/BehaviourStates/Normal"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Staggered")
+event = &"hurt"
+
 [node name="Attack" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")
 
@@ -1195,6 +1200,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Parry")
 event = &"parry"
 
+[node name="ToStagger" type="Node" parent="StateChart/ParallelState/BehaviourStates/Attack"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Staggered")
+event = &"hurt"
+
 [node name="Dash" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")
 
@@ -1203,6 +1213,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
 delay_seconds = 0.3
 
+[node name="ToStagger" type="Node" parent="StateChart/ParallelState/BehaviourStates/Dash"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Staggered")
+event = &"hurt"
+
 [node name="Parry" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")
 
@@ -1210,6 +1225,11 @@ script = ExtResource("5_apxxk")
 script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
 delay_seconds = 0.5
+
+[node name="ToStagger" type="Node" parent="StateChart/ParallelState/BehaviourStates/Parry"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Staggered")
+event = &"hurt"
 
 [node name="Staggered" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")

@@ -1,0 +1,205 @@
+[gd_scene load_steps=19 format=3 uid="uid://ciko4rr4a3h2f"]
+
+[ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="1_qh8og"]
+[ext_resource type="Script" path="res://src/enemy/laser/laser_enemy.gd" id="1_r6yox"]
+[ext_resource type="Material" uid="uid://dl64cycsvif7q" path="res://src/shaders/flash_sprite.tres" id="2_1ojur"]
+[ext_resource type="Texture2D" uid="uid://ceo234rmkruk0" path="res://assets/images/enemy/laser/laser_idle.png" id="2_kruvw"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="3_rau2x"]
+[ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="4_70sbj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_tkp17"]
+[ext_resource type="Script" path="res://src/enemy/laser/laser.gd" id="6_eh05j"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_xr8eo"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_qs0kj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_as0lc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hro1"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6dw26"]
+radius = 50.0
+
+[sub_resource type="Animation" id="Animation_0kp5l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4vepa"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_x7f60"]
+resource_name = "shooting"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.8, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"laser_targeting"
+}, {
+"args": [],
+"method": &"shoot"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g5nep"]
+_data = {
+"RESET": SubResource("Animation_0kp5l"),
+"idle": SubResource("Animation_4vepa"),
+"shooting": SubResource("Animation_x7f60")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hvyy1"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+angle_max = 360.0
+radial_velocity_min = -300.0
+radial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color = Color(1, 1, 0, 1)
+hue_variation_max = 0.1
+
+[node name="LaserEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player", "laser")]
+script = ExtResource("1_r6yox")
+sprite_shader = ExtResource("2_1ojur")
+state_chart = NodePath("StateChart")
+animation_player = NodePath("AnimationPlayer")
+laser = NodePath("Laser")
+
+[node name="SpriteManager" type="Node2D" parent="."]
+position = Vector2(0, -40)
+scale = Vector2(2, 2)
+script = ExtResource("1_qh8og")
+
+[node name="IdleSprite2D" type="Sprite2D" parent="SpriteManager"]
+material = ExtResource("2_1ojur")
+texture = ExtResource("2_kruvw")
+hframes = 10
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2hro1")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -28)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_rau2x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_6dw26")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g5nep")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(0, -10)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_hvyy1")
+texture = ExtResource("4_70sbj")
+lifetime = 0.7
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+
+[node name="Laser" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 3
+collide_with_areas = true
+script = ExtResource("6_eh05j")
+
+[node name="Line2D" type="Line2D" parent="Laser"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 0.0
+default_color = Color(2, 0, 0, 1)
+end_cap_mode = 2
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("5_tkp17")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("6_xr8eo")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_qs0kj")
+
+[node name="ToShooting" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("8_as0lc")
+to = NodePath("../../Shooting")
+event = &"idle_finished"
+
+[node name="Shooting" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_qs0kj")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Shooting"]
+script = ExtResource("8_as0lc")
+to = NodePath("../../Idle")
+delay_seconds = 2.5
+
+[connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Shooting" to="." method="_on_shooting_state_entered"]

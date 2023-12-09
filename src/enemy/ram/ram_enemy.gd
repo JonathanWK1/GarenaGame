@@ -6,6 +6,9 @@ extends Enemy
 @export var state_chart: StateChart
 @export var animator: Animator
 @export var hitbox: HitBox
+@export var dust_particle: GPUParticles2D
+@export var charge_particle: GPUParticles2D
+@export var charge_sprite: Sprite2D
 
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
@@ -15,7 +18,7 @@ var ram_time := 0.0
 
 func _ready() -> void:
 	super._ready()
-	health.hp = 5
+	health.hp = 10
 	health.dead.connect(queue_free)
 
 
@@ -24,7 +27,7 @@ func _on_idle_state_entered() -> void:
 	var direction := Vector2.RIGHT.rotated(randf_range(-PI, PI))
 	animator.play_8_way_anim('walk', direction)
 	velocity = direction * idle_speed
-	await get_tree().create_timer(randf_range(1, 1)).timeout
+	await get_tree().create_timer(randf_range(1, 5)).timeout
 	state_chart.send_event('idle_finished')
 
 
@@ -46,6 +49,7 @@ func _on_ram_state_entered() -> void:
 	animator.play_8_way_anim('ram', v2)
 	velocity = Vector2.RIGHT.rotated(angle) * ram_speed
 	hitbox.enable()
+	charge_sprite.show()
 	ram_time = 2.0
 
 
@@ -61,6 +65,8 @@ func _on_ram_state_physics_processing(delta: float) -> void:
 
 func _on_ram_state_exited() -> void:
 	hitbox.disable()
+	dust_particle.emitting = false
+	charge_sprite.hide()
 #endregion
 
 
