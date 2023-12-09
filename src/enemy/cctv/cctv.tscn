@@ -6,8 +6,8 @@
 
 [node name="CCTV" type="Node2D" node_paths=PackedStringArray("laser")]
 script = ExtResource("1_2tiow")
-rotation_speed = 40.0
 laser = NodePath("BigLaser")
+rotation_speed = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 0.25)
