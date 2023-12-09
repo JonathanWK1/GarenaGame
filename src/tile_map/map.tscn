@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://brrg3g311unsc"]
+[gd_scene load_steps=32 format=3 uid="uid://brrg3g311unsc"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_8pqtf"]
 [ext_resource type="Texture2D" uid="uid://bgwbej76bxrc7" path="res://assets/images/Tilemap/tile.png" id="1_21evs"]
@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://toctilhxufyo" path="res://assets/images/Tilemap/table.png" id="20_r0d3m"]
 [ext_resource type="Texture2D" uid="uid://5t6sktvky5tl" path="res://assets/images/Tilemap/paper.png" id="21_trmyk"]
 [ext_resource type="Texture2D" uid="uid://cispqcnlgty5r" path="res://assets/images/Tilemap/computer.png" id="22_8elu7"]
+[ext_resource type="Texture2D" uid="uid://dpl24f2x545ex" path="res://assets/images/Tilemap/paper2.png" id="24_bhve6"]
+[ext_resource type="Texture2D" uid="uid://b0xpg0suui1vq" path="res://assets/images/Tilemap/book2.png" id="25_fs3ud"]
+[ext_resource type="Texture2D" uid="uid://c0x05v0xlarqs" path="res://assets/images/Tilemap/book.png" id="26_q4n1w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gbb7w"]
 texture = ExtResource("2_6u0br")
@@ -830,8 +833,21 @@ enemy_scn = ExtResource("5_3vnhk")
 script = ExtResource("9_lxe4s")
 
 [node name="NPC1" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(1518, 721)
+position = Vector2(1600, 576)
 text = "Training iteration 1,your objective is to finish the training module within the time limit, good luck."
+
+[node name="TriggerArea" parent="SpeakerContainer/NPC1" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="SpeakerContainer/NPC1/TriggerArea" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" parent="SpeakerContainer/NPC1" index="1"]
+metadata/_edit_lock_ = true
+
+[node name="Sprite" parent="SpeakerContainer/NPC1" index="2"]
+texture = ExtResource("15_ars2r")
+metadata/_edit_lock_ = true
 
 [node name="TimedDoor" parent="SpeakerContainer" node_paths=PackedStringArray("gate_group") instance=ExtResource("2_46fep")]
 position = Vector2(6717, 2239)
@@ -875,33 +891,57 @@ vertical_alignment = 1
 
 [node name="NPC2" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(10946, 1602)
-text = "congratulation, you completed the trial please proceed to this gate"
+text = "Congratulations! You have successfully completed the trial. Please proceed to the gate."
 
 [node name="InfoRam" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(6762, 3909)
-text = "Model MR85This model will ram into anything that catches its sight. I tried adding another speed module to one of these models, "
+position = Vector2(5888, 3414)
+text = "The integration of Model MR85 with a speed module has been a success, rendering it significantly more destructive. However, it does require a slightly longer charging time compared to other similar models."
+metadata/_edit_group_ = true
 
-[node name="InfoRam2" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(6495, 3914)
-text = "and it has become more destructive. However, it needs a slightly longer charging time than other similar models."
+[node name="Sprite" parent="SpeakerContainer/InfoRam" index="2"]
+texture = ExtResource("15_ars2r")
 
 [node name="InfoRam3" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(6197, 3854)
-text = "9 December 2023During testing of the new Ram Model, an intern inadvertently activated it, causing it to ram into the wall and require rebuilding. Let's hope such an incident doesn't occur again."
+position = Vector2(5832, 3910)
+text = "On December 9, 2023, during the testing of MR85, an intern accidentally activated it, causing it to ram into a wall. Rebuilding that wall proved to be a costly endeavor. Let's hope such an incident doesn't occur again!"
+metadata/_edit_group_ = true
+
+[node name="Sprite" parent="SpeakerContainer/InfoRam3" index="2"]
+texture = ExtResource("15_ars2r")
 
 [node name="InfoCam" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(3599, 2130)
-text = "Model CM58One is our most advanced security cameras with built-in laser that's capable of finding and destroying anything instantly. We even used it to protect the password room!"
+text = "Model CM58One is our most advanced security camera with a built-in laser capable of finding and destroying anything instantly. We even used it to protect the password room!"
+
+[node name="TriggerArea" parent="SpeakerContainer/InfoCam" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="SpeakerContainer/InfoCam/TriggerArea" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" parent="SpeakerContainer/InfoCam" index="1"]
+metadata/_edit_lock_ = true
 
 [node name="Sprite" parent="SpeakerContainer/InfoCam" index="2"]
 texture = ExtResource("15_ars2r")
+metadata/_edit_lock_ = true
 
 [node name="InfoCam2" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(3128, 2130)
-text = "Unfortunately CM58One can only detect moving targets. It won’t shoot anything that stay still. Someone probably passed the scripting job to an intern."
+text = "Unfortunately, CM58One can only detect moving targets. It won’t shoot anything that stays still. Someone probably passed the scripting job to an intern."
+
+[node name="TriggerArea" parent="SpeakerContainer/InfoCam2" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="SpeakerContainer/InfoCam2/TriggerArea" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" parent="SpeakerContainer/InfoCam2" index="1"]
+metadata/_edit_lock_ = true
 
 [node name="Sprite" parent="SpeakerContainer/InfoCam2" index="2"]
 texture = ExtResource("15_ars2r")
+metadata/_edit_lock_ = true
 
 [node name="InfoCode" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(8906, -814)
@@ -909,7 +949,8 @@ text = "Admin Room Password : 5 4 6 2"
 
 [node name="WarningSign" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(10367, 256)
-text = "Forbidden Area: unauthorized Entity will be destroyed"
+text = "Restricted Zone: Unauthorized entities will face destruction!"
+metadata/_edit_group_ = true
 
 [node name="Sprite" parent="SpeakerContainer/WarningSign" index="2"]
 scale = Vector2(2, 2)
@@ -920,7 +961,11 @@ position = Vector2(3887, 976)
 
 [node name="BrokenWall" parent="BreakableWall" instance=ExtResource("2_46fep")]
 position = Vector2(-37, -35)
-text = "Looks like the way got blocked by a big pile of steel"
+text = "This wall looks like it could collapse at any time."
+metadata/_edit_group_ = true
+
+[node name="Sprite" parent="BreakableWall/BrokenWall" index="2"]
+texture = ExtResource("15_ars2r")
 
 [node name="GateContainer" type="Node2D" parent="."]
 
@@ -1154,11 +1199,74 @@ texture = ExtResource("20_r0d3m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InfoCamDecorations/Table3/StaticBody2D"]
 shape = SubResource("RectangleShape2D_cf4bj")
 
-[node name="Computer" type="Sprite2D" parent="."]
+[node name="Computer2" type="Sprite2D" parent="InfoCamDecorations"]
 position = Vector2(3599, 1997)
 texture = ExtResource("22_8elu7")
 
+[node name="StartDecorations" type="Node2D" parent="."]
+
+[node name="Table" type="Sprite2D" parent="StartDecorations"]
+position = Vector2(1600, 448)
+texture = ExtResource("20_r0d3m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StartDecorations/Table"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartDecorations/Table/StaticBody2D"]
+shape = SubResource("RectangleShape2D_cf4bj")
+
+[node name="Computer" type="Sprite2D" parent="StartDecorations"]
+position = Vector2(1600, 448)
+texture = ExtResource("22_8elu7")
+
+[node name="InfoRamDecorations" type="Node2D" parent="."]
+
+[node name="Table" type="Sprite2D" parent="."]
+position = Vector2(5824, 3278)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="Paper2" type="Sprite2D" parent="Table"]
+position = Vector2(-24, -8)
+texture = ExtResource("24_bhve6")
+
+[node name="Paper" type="Sprite2D" parent="Table"]
+position = Vector2(8, 8)
+texture = ExtResource("21_trmyk")
+
+[node name="Table2" type="Sprite2D" parent="."]
+position = Vector2(5952, 3278)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="Book2" type="Sprite2D" parent="Table2"]
+texture = ExtResource("25_fs3ud")
+
+[node name="Table3" type="Sprite2D" parent="."]
+position = Vector2(5824, 4030)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="Book2" type="Sprite2D" parent="Table3"]
+position = Vector2(-8, -16)
+texture = ExtResource("25_fs3ud")
+
+[node name="Book" type="Sprite2D" parent="Table3"]
+position = Vector2(16, 16)
+texture = ExtResource("26_q4n1w")
+
+[node name="Table4" type="Sprite2D" parent="."]
+position = Vector2(5824, 3774)
+texture = ExtResource("20_r0d3m")
+
+[node name="Computer" type="Sprite2D" parent="."]
+position = Vector2(5824, 3774)
+texture = ExtResource("22_8elu7")
+
+[editable path="SpeakerContainer/NPC1"]
 [editable path="SpeakerContainer/TimedDoor"]
+[editable path="SpeakerContainer/InfoRam"]
+[editable path="SpeakerContainer/InfoRam3"]
 [editable path="SpeakerContainer/InfoCam"]
 [editable path="SpeakerContainer/InfoCam2"]
 [editable path="SpeakerContainer/WarningSign"]
+[editable path="BreakableWall/BrokenWall"]
