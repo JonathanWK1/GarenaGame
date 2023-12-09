@@ -432,7 +432,7 @@ texture = ExtResource("1_wtu1f")
 position = Vector2(444, 392)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_v4geg")
-frame_progress = 0.0264075
+frame_progress = 0.458983
 
 [node name="PlayButton" type="TextureButton" parent="."]
 layout_mode = 0
