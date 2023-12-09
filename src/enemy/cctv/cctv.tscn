@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtixyf24bjjg8"]
+
+[ext_resource type="Script" path="res://src/enemy/cctv/cctv.gd" id="1_2tiow"]
+[ext_resource type="Texture2D" uid="uid://c2osoniwraj4q" path="res://assets/images/particles/cctv_light.png" id="1_ivlxu"]
+
+[node name="CCTV" type="Node2D"]
+script = ExtResource("1_2tiow")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 0.25)
+texture = ExtResource("1_ivlxu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, 0, 256, 0, 248, 64, 224, 128, 192, 168, 168, 192, 128, 224, 64, 248, 0, 256)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=11 format=3 uid="uid://bq5ts738kbc3x"]
 
 [ext_resource type="Script" path="res://src/game_world.gd" id="1_2amqc"]
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_p808p"]
 [ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="5_7oqqq"]
 [ext_resource type="Script" path="res://src/Camera/Camera2D.gd" id="7_s6o3i"]
+[ext_resource type="PackedScene" uid="uid://dtixyf24bjjg8" path="res://src/enemy/cctv/cctv.tscn" id="10_hhpuc"]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_2amqc")
@@ -46,4 +47,9 @@ enemy_scn = ExtResource("3_xcidh")
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("7_s6o3i")
+player = NodePath("../Player")
+
+[node name="CCTV" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_hhpuc")]
+position = Vector2(1667, 258)
+rotation = 1.5708
 player = NodePath("../Player")
