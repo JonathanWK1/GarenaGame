@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtixyf24bjjg8"]
+[gd_scene load_steps=4 format=3 uid="uid://dtixyf24bjjg8"]
 
 [ext_resource type="Script" path="res://src/enemy/cctv/cctv.gd" id="1_2tiow"]
 [ext_resource type="Texture2D" uid="uid://c2osoniwraj4q" path="res://assets/images/particles/cctv_light.png" id="1_ivlxu"]
+[ext_resource type="Script" path="res://src/enemy/cctv/big_laser.gd" id="3_0blh0"]
 
-[node name="CCTV" type="Node2D"]
+[node name="CCTV" type="Node2D" node_paths=PackedStringArray("laser")]
 script = ExtResource("1_2tiow")
 rotation_speed = 40.0
+laser = NodePath("BigLaser")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 0.25)
@@ -21,6 +23,19 @@ monitorable = false
 position = Vector2(0.999998, -3)
 scale = Vector2(1.24512, 1.26492)
 polygon = PackedVector2Array(0, 0, 256, 0, 248, 64, 224, 128, 192, 168, 168, 192, 128, 224, 64, 248, 0, 256)
+
+[node name="BigLaser" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 3
+collide_with_areas = true
+script = ExtResource("3_0blh0")
+
+[node name="Line2D" type="Line2D" parent="BigLaser"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 0.0
+default_color = Color(2, 0, 1, 1)
+end_cap_mode = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
