@@ -22,6 +22,7 @@ class_name Player
 @export var dash_speed := 1000.0
 
 var direction := Vector2.ZERO
+var attacked_direction := Vector2.ZERO
 
 var weapon_rotation := 0.0
 var attack_combo := 0
@@ -152,10 +153,26 @@ func _on_parry_state_entered() -> void:
 #endregion
 
 
+#region Staggered State
+func _on_staggered_state_entered() -> void:
+	pass
+
+
+func _on_staggered_state_physics_processing(delta: float) -> void:
+	pass # Replace with function body.
+
+
+func _on_staggered_state_exited() -> void:
+	pass # Replace with function body.
+#endregion
+
+
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	attacked_direction = attack_position - global_position
 	state_chart.send_event('hurt')
 	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
 	GlobalEffects.freeze_frame(0.5)
 	health.hp -= 1
 	await get_tree().create_timer(0.05).timeout
 	sprite_shader.set_shader_parameter('flash_modifier', 0.0)
+
