@@ -5,6 +5,7 @@ class_name Arena
 @export var spawners: Array[EnemySpawner] = []
 @export var gate_group_list: Array[GateGroup] = []
 
+@export var id : = 0
 var triggered := false
 var spawned_enemies: Array[Enemy] = []
 var enemy_left := 0 :
@@ -13,6 +14,7 @@ var enemy_left := 0 :
 		if enemy_left <= 0:
 			set_gate(false)
 			GlobalSignal.arena_finished.emit()
+			GlobalSignal._arena_finished.emit(self)
 
 
 func spawn_enemies(area: Area2D) -> void:

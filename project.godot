@@ -31,6 +31,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
+[gui]
+
+theme/custom="res://godot_state_charts_examples/new_theme.tres"
+
 [input]
 
 move_up={
