@@ -10,7 +10,6 @@ var spawned_enemies: Array[Enemy] = []
 var enemy_left := 0 :
 	set(value):
 		enemy_left = value
-		print(enemy_left)
 		if enemy_left <= 0:
 			set_gate(false)
 			GlobalSignal.arena_finished.emit()
