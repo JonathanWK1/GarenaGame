@@ -682,7 +682,7 @@ position = Vector2(0, 2)
 script = ExtResource("1_wrior")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
-position = Vector2(1034, 601)
+position = Vector2(10367, 334)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2opqv")

@@ -26,6 +26,8 @@ func _physics_process(delta: float) -> void:
 		
 		if not hit and collider is HurtBox:
 			collider.got_hit(get_collision_point())
+			collider.got_hit(get_collision_point())
+			collider.got_hit(get_collision_point())
 			hit = true
 	
 	line.points[1] = cast_point
