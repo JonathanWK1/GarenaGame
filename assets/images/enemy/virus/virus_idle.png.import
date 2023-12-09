@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dben1vlab3evo"
-path="res://.godot/imported/player_walk.png-d84299976f4eb6ade966efc7c869f220.ctex"
+uid="uid://25ukn6esqyrc"
+path="res://.godot/imported/virus_idle.png-41bf1af3e0c2badb9d6b2a969fe9931d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/player_walk.png"
-dest_files=["res://.godot/imported/player_walk.png-d84299976f4eb6ade966efc7c869f220.ctex"]
+source_file="res://assets/images/enemy/virus/virus_idle.png"
+dest_files=["res://.godot/imported/virus_idle.png-41bf1af3e0c2badb9d6b2a969fe9931d.ctex"]
 
 [params]
 
