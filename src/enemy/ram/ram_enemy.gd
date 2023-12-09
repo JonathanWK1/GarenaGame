@@ -10,6 +10,8 @@ extends Enemy
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
 
+@onready var hit_particle := $HitParticle
+
 var ram_time := 0.0
 
 
@@ -56,6 +58,7 @@ func _on_ram_state_physics_processing(delta: float) -> void:
 		velocity = velocity.normalized() * lerpf(0.1, ram_speed, ram_time)
 	
 	if move_and_slide():
+		hit_particle.emitting = true
 		state_chart.send_event('ram_collided')
 
 
