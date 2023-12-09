@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://ciko4rr4a3h2f"]
+[gd_scene load_steps=20 format=3 uid="uid://ciko4rr4a3h2f"]
 
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="1_qh8og"]
 [ext_resource type="Script" path="res://src/enemy/laser/laser_enemy.gd" id="1_r6yox"]
 [ext_resource type="Material" uid="uid://dl64cycsvif7q" path="res://src/shaders/flash_sprite.tres" id="2_1ojur"]
 [ext_resource type="Texture2D" uid="uid://ceo234rmkruk0" path="res://assets/images/enemy/laser/laser_idle.png" id="2_kruvw"]
+[ext_resource type="Texture2D" uid="uid://b2upt4gm01f5g" path="res://assets/images/particles/circle_shadow.png" id="3_gyc5g"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="3_rau2x"]
 [ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="4_70sbj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_tkp17"]
@@ -121,6 +122,11 @@ state_chart = NodePath("StateChart")
 animation_player = NodePath("AnimationPlayer")
 laser = NodePath("Laser")
 
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(2, 2)
+texture = ExtResource("3_gyc5g")
+
 [node name="SpriteManager" type="Node2D" parent="."]
 position = Vector2(0, -40)
 scale = Vector2(2, 2)
@@ -133,9 +139,11 @@ hframes = 10
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_2hro1")
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -28)
 collision_layer = 4
 collision_mask = 0
