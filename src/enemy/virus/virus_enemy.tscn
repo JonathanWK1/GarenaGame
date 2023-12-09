@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3 uid="uid://dxkecsk5q42bs"]
+
+[ext_resource type="Script" path="res://src/enemy/virus/virus_enemy.gd" id="1_0hmri"]
+[ext_resource type="PackedScene" uid="uid://dqcx3icn3q23o" path="res://src/enemy/virus/virus_bullet.tscn" id="2_okamn"]
+[ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_xdpot"]
+[ext_resource type="Texture2D" uid="uid://25ukn6esqyrc" path="res://assets/images/enemy/virus/virus_idle.png" id="3_puw5g"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_47o6t"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_va7ce"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_njftb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_54bol"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_d2fke"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tfhoi"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dagof"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_p1p24"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_4scqg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l1ntt"]
+resource_name = "shooting"
+length = 1.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c6gp2"]
+_data = {
+"RESET": SubResource("Animation_4scqg"),
+"idle": SubResource("Animation_p1p24"),
+"shooting": SubResource("Animation_l1ntt")
+}
+
+[node name="VirusEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player")]
+collision_layer = 32
+collision_mask = 33
+motion_mode = 1
+script = ExtResource("1_0hmri")
+bullet_scn = ExtResource("2_okamn")
+state_chart = NodePath("StateChart")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="SpriteManager" type="Node2D" parent="."]
+position = Vector2(0, -48)
+scale = Vector2(2, 2)
+script = ExtResource("2_xdpot")
+
+[node name="IdleSprite2D" type="Sprite2D" parent="SpriteManager"]
+texture = ExtResource("3_puw5g")
+hframes = 10
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tfhoi")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -28)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_47o6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_dagof")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c6gp2")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("5_va7ce")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("6_njftb")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_54bol")
+
+[node name="ToShooting" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("8_d2fke")
+to = NodePath("../../Shooting")
+event = &"idle_finished"
+
+[node name="Shooting" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_54bol")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Shooting"]
+script = ExtResource("8_d2fke")
+to = NodePath("../../Idle")
+delay_seconds = 1.1
+
+[connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Shooting" to="." method="_on_shooting_state_entered"]

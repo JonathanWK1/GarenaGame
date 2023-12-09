@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqcx3icn3q23o"]
+
+[ext_resource type="Script" path="res://src/enemy/virus/virus_bullet.gd" id="1_ayv00"]
+[ext_resource type="Texture2D" uid="uid://deofx2wb0i3q2" path="res://assets/images/enemy/virus/bullet.png" id="1_pm5av"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_58ko1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whxdo"]
+size = Vector2(20, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mwlp"]
+size = Vector2(40, 10)
+
+[node name="VirusBullet" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_ayv00")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pm5av")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_whxdo")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("3_58ko1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_2mwlp")
+
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]

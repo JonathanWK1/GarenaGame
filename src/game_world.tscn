@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=7 format=3 uid="uid://bq5ts738kbc3x"]
 
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
 [ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="2_x1m5l"]
 [ext_resource type="PackedScene" uid="uid://dptcg7pk21lxl" path="res://src/arena/arena.tscn" id="3_da2vo"]
 [ext_resource type="PackedScene" uid="uid://binqsx11r7f0n" path="res://src/enemy/ram/ram_enemy.tscn" id="3_xcidh"]
 [ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_p808p"]
+[ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="5_7oqqq"]
 
 [node name="GameWorld" type="Node2D"]
 
@@ -27,7 +28,7 @@ metadata/_edit_lock_ = true
 [node name="EnemySpawner" type="Marker2D" parent="Arena"]
 position = Vector2(-103, 178)
 script = ExtResource("4_p808p")
-enemy_scn = ExtResource("3_xcidh")
+enemy_scn = ExtResource("5_7oqqq")
 
 [node name="EnemySpawner2" type="Marker2D" parent="Arena"]
 position = Vector2(177, 10)
