@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxkecsk5q42bs"]
+[gd_scene load_steps=19 format=3 uid="uid://dxkecsk5q42bs"]
 
 [ext_resource type="Script" path="res://src/enemy/virus/virus_enemy.gd" id="1_0hmri"]
 [ext_resource type="PackedScene" uid="uid://dqcx3icn3q23o" path="res://src/enemy/virus/virus_bullet.tscn" id="2_okamn"]
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_xdpot"]
 [ext_resource type="Texture2D" uid="uid://25ukn6esqyrc" path="res://assets/images/enemy/virus/virus_idle.png" id="3_puw5g"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_47o6t"]
+[ext_resource type="Material" uid="uid://dl64cycsvif7q" path="res://src/shaders/flash_sprite.tres" id="4_yy003"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_va7ce"]
 [ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="6_fa3cg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_njftb"]
@@ -16,22 +17,6 @@ radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dagof"]
 radius = 32.0
-
-[sub_resource type="Animation" id="Animation_p1p24"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
 
 [sub_resource type="Animation" id="Animation_4scqg"]
 length = 0.001
@@ -58,6 +43,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_p1p24"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager/IdleSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
 [sub_resource type="Animation" id="Animation_l1ntt"]
@@ -116,6 +117,7 @@ collision_layer = 32
 collision_mask = 33
 motion_mode = 1
 script = ExtResource("1_0hmri")
+sprite_shader = ExtResource("4_yy003")
 bullet_scn = ExtResource("2_okamn")
 state_chart = NodePath("StateChart")
 animation_player = NodePath("AnimationPlayer")
@@ -126,6 +128,7 @@ scale = Vector2(2, 2)
 script = ExtResource("2_xdpot")
 
 [node name="IdleSprite2D" type="Sprite2D" parent="SpriteManager"]
+material = ExtResource("4_yy003")
 texture = ExtResource("3_puw5g")
 hframes = 10
 vframes = 4

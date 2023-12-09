@@ -10,11 +10,14 @@ size = Vector2(20, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mwlp"]
 size = Vector2(40, 10)
 
-[node name="VirusBullet" type="CharacterBody2D"]
+[node name="VirusBullet" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "parry_raycast")]
 collision_layer = 0
 script = ExtResource("1_ayv00")
+hitbox = NodePath("HitBox")
+parry_raycast = NodePath("ParryRayCast2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1.5, 1.5, 1.5, 1)
 texture = ExtResource("1_pm5av")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -28,5 +31,11 @@ script = ExtResource("3_58ko1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_2mwlp")
+
+[node name="ParryRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(100, 0)
+collision_mask = 64
+collide_with_areas = true
+collide_with_bodies = false
 
 [connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
