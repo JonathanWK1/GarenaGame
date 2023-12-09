@@ -3,8 +3,9 @@ extends CharacterBody2D
 
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager
-@export var animator: PlayerAnimator
+@export var animator: Animator
 @export var health: Health
+@export var hurtbox: HurtBox
 
 @export var weapon_pivot: Marker2D
 @export var weapon_hitbox: HitBox
@@ -18,6 +19,8 @@ extends CharacterBody2D
 var direction := Vector2.ZERO
 
 var weapon_rotation := 0.0
+var attack_combo := 0
+var attack_queue := false
 
 
 func get_move_input() -> Vector2:
@@ -52,10 +55,10 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 
 #region Attack State
 func _on_attack_state_entered() -> void:
-	print(Vector2.RIGHT.rotated(weapon_rotation))
-	animator.play_8_way_anim('first_attack', Vector2.RIGHT.rotated(weapon_rotation))
+	animator.play_8_way_anim('first_attack' if attack_combo == 0 else 'second_attack', Vector2.RIGHT.rotated(weapon_rotation))
 	weapon_pivot.rotation = weapon_rotation
 	weapon_hitbox.enable()
+	attack_combo ^= 1
 
 
 func _on_attack_state_unhandled_input(event: InputEvent) -> void:
@@ -63,20 +66,37 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 		direction = get_move_input()
 		state_chart.send_event('dash')
 		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed('attack'):
+		attack_queue = true
+		get_viewport().set_input_as_handled()
 
 
 func _on_attack_state_exited() -> void:
 	weapon_hitbox.disable()
+
+
+func _on_to_normal_taken() -> void:
+	if attack_queue:
+		attack_queue = false
+		state_chart.send_event('attack')
+	else:
+		attack_combo = 0
 #endregion
 
 
 #region Dash State
 func _on_dash_state_entered() -> void:
+	hurtbox.disable()
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
-	trail_manager.summon_trail(4, 0.3)
+	trail_manager.summon_trail(5, 0.3)
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
 	move_and_slide()
+
+
+func _on_dash_state_exited() -> void:
+	hurtbox.enable()
 #endregion

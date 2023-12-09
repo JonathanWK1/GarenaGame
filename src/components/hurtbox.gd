@@ -3,10 +3,7 @@ extends Area2D
 class_name HurtBox
 
 
-#signal attack_detected(attack: Attack, attack_position: Vector2)
-
-
-var group_name := ""
+signal attack_detected(attack_position: Vector2)
 
 
 func enable() -> void:
@@ -23,5 +20,5 @@ func disable() -> void:
 		(child as CollisionShape2D).set_deferred("disabled", true)
 
 
-#func got_hit(attack: Attack, attack_position: Vector2) -> void:
-	#attack_detected.emit(attack, attack_position)
+func got_hit(attack_position: Vector2) -> void:
+	attack_detected.emit(attack_position)

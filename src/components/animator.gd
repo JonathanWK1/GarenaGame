@@ -1,6 +1,6 @@
 extends Node
 
-class_name PlayerAnimator
+class_name Animator
 
 
 signal animation_finished
