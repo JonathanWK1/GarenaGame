@@ -14,6 +14,8 @@ var iteration = 1:
 	set(value):
 		iteration = value
 		GlobalSignal.iteration_changed.emit(iteration)
+
+
 func _ready():
 	spawn_player()
 	player.health.dead.connect(reset_loop)
