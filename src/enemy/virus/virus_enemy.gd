@@ -16,10 +16,10 @@ func _ready() -> void:
 
 func shoot() -> void:
 	print("SHOOT")
-	var bullet: CharacterBody2D = bullet_scn.instantiate()
+	var bullet: Bullet = bullet_scn.instantiate()
 	get_parent().call_deferred("add_child", bullet)
 	bullet.set_deferred('global_position', global_position)
-	bullet.initialize(randf_range(-PI, PI))
+	bullet.initialize(global_position.angle_to_point(target.global_position))
 
 
 #region Idle State

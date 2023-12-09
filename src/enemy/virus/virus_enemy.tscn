@@ -119,7 +119,6 @@ script = ExtResource("1_0hmri")
 bullet_scn = ExtResource("2_okamn")
 state_chart = NodePath("StateChart")
 animation_player = NodePath("AnimationPlayer")
-idle_speed = null
 
 [node name="SpriteManager" type="Node2D" parent="."]
 position = Vector2(0, -48)
