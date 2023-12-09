@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager

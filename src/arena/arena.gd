@@ -1,6 +1,6 @@
 extends Node2D
 
-
+class_name Arena
 
 @export var spawners: Array[EnemySpawner] = []
 
@@ -24,6 +24,10 @@ func spawn_enemies(area: Area2D) -> void:
 			func():
 				enemy_left -= 1
 		)
+		
+
+func reset_trigger():
+	triggered = false
 
 
 func _on_trigger_area_area_entered(area: Area2D) -> void:
