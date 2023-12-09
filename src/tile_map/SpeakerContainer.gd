@@ -10,6 +10,7 @@ func set_text_npc1(value):
 	var text = "Training iteration " + str(value) + ",your objective is to finish the training module within the time limit, good luck."
 	first_npc.set_text(text)
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

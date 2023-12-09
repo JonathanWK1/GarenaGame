@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://brrg3g311unsc"]
+[gd_scene load_steps=23 format=3 uid="uid://brrg3g311unsc"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_8pqtf"]
 [ext_resource type="Texture2D" uid="uid://bgwbej76bxrc7" path="res://assets/images/Tilemap/tile.png" id="1_21evs"]
@@ -14,7 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://bd63v37p60b8u" path="res://src/Breakable/breakable_object.tscn" id="9_6t4e6"]
 [ext_resource type="Script" path="res://src/tile_map/SpeakerContainer.gd" id="9_lxe4s"]
 [ext_resource type="PackedScene" uid="uid://bbt7pvack4gw1" path="res://src/Gate/gate.tscn" id="11_o4p8k"]
+[ext_resource type="Script" path="res://src/speaker/TimedDoor.gd" id="12_8bhxx"]
+[ext_resource type="Texture2D" uid="uid://bn76ye06some8" path="res://assets/images/Tilemap/icon_hour_glass.png" id="12_e8opp"]
 [ext_resource type="Script" path="res://src/tile_map/GateGroup.gd" id="12_s6q6h"]
+[ext_resource type="Texture2D" uid="uid://clb7w80cfl07h" path="res://assets/images/Tilemap/icon_warning.png" id="14_or6hr"]
 [ext_resource type="PackedScene" uid="uid://dtixyf24bjjg8" path="res://src/enemy/cctv/cctv.tscn" id="15_k2i5s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gbb7w"]
@@ -682,7 +685,7 @@ position = Vector2(0, 2)
 script = ExtResource("1_wrior")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
-position = Vector2(10367, 334)
+position = Vector2(10396, 1444)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2opqv")
@@ -759,6 +762,7 @@ enemy_scn = ExtResource("5_3vnhk")
 position = Vector2(6337, 1823)
 spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4"), NodePath("EnemySpawner5")]
 gate_group_list = [NodePath("../../GateContainer/GateGroup4"), NodePath("../../GateContainer/GateGroup7"), NodePath("../../GateContainer/GateGroup8")]
+id = 1
 
 [node name="EnemySpawner" type="Marker2D" parent="ArenaContainer/Arena3"]
 position = Vector2(-302, -304)
@@ -822,9 +826,41 @@ script = ExtResource("9_lxe4s")
 position = Vector2(1518, 721)
 text = "Training iteration 1,your objective is to finish the training module within the time limit, good luck."
 
-[node name="TimedDoor" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(6699, 2237)
-text = "it's closed now, i wonder if i made it faster is it stiil closed"
+[node name="TimedDoor" parent="SpeakerContainer" node_paths=PackedStringArray("gate_group") instance=ExtResource("2_46fep")]
+position = Vector2(6717, 2239)
+script = ExtResource("12_8bhxx")
+time_limit = 180
+gate_group = NodePath("../../GateContainer/GateGroup7")
+
+[node name="CollisionShape2D" parent="SpeakerContainer/TimedDoor/TriggerArea" index="0"]
+position = Vector2(-2, 14)
+
+[node name="ColorRect2" type="ColorRect" parent="SpeakerContainer/TimedDoor"]
+offset_left = -62.0
+offset_right = 65.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="SpeakerContainer/TimedDoor/ColorRect2"]
+layout_mode = 0
+offset_right = 49.0
+offset_bottom = 64.0
+texture = ExtResource("12_e8opp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimerLabel" type="Label" parent="SpeakerContainer/TimedDoor/ColorRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.945
+anchor_bottom = 1.0
+offset_right = -0.015007
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "00"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="NPC2" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(10946, 1602)
@@ -850,9 +886,17 @@ text = "Model CM58One of the most advanced security cameras with built-in laser 
 position = Vector2(3273, 2358)
 text = "Well but only moving targets, it won’t shoot anything that stay still, maybe because the scripting is written by an intern."
 
-[node name="Speaker" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
+[node name="InfoCode" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(8906, -814)
 text = "Admin Room Password : 5 4 6 2"
+
+[node name="WarningSign" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
+position = Vector2(10367, 256)
+text = "Forbidden Area: unauthorized Entity will be destroyed"
+sprite_texture = ExtResource("14_or6hr")
+
+[node name="Sprite" parent="SpeakerContainer/WarningSign" index="2"]
+scale = Vector2(2, 2)
 
 [node name="BreakableWall" parent="." instance=ExtResource("9_6t4e6")]
 position = Vector2(3887, 976)
@@ -1055,3 +1099,6 @@ scale = Vector2(1.5, 1.5)
 min_rotation = 50.0
 max_rotation = 220.0
 metadata/_edit_lock_ = true
+
+[editable path="SpeakerContainer/TimedDoor"]
+[editable path="SpeakerContainer/WarningSign"]
