@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dusmf2n36fx2b"
-path="res://.godot/imported/player_dash.png-1d409bb2e405dc5aeeafc8ad276dce6f.ctex"
+uid="uid://deofx2wb0i3q2"
+path="res://.godot/imported/bullet.png-004e4f3c2075a11d4baea06183012c31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/player_dash.png"
-dest_files=["res://.godot/imported/player_dash.png-1d409bb2e405dc5aeeafc8ad276dce6f.ctex"]
+source_file="res://assets/images/enemy/virus/bullet.png"
+dest_files=["res://.godot/imported/bullet.png-004e4f3c2075a11d4baea06183012c31.ctex"]
 
 [params]
 

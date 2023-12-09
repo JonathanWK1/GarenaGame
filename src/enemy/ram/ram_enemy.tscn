@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://binqsx11r7f0n"]
+[gd_scene load_steps=18 format=3 uid="uid://binqsx11r7f0n"]
 
 [ext_resource type="Script" path="res://src/enemy/ram/ram_enemy.gd" id="1_02sjg"]
-[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_xctnm"]
+[ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_cbvfo"]
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="2_eq6eu"]
+[ext_resource type="Texture2D" uid="uid://dykbosi5r21jr" path="res://assets/images/enemy/ram/ram_walk.png" id="3_a6i4y"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="3_kv616"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_vnsqh"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_dw7se"]
@@ -11,16 +12,16 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_4oxr5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aqfp8"]
-radius = 40.0
-height = 100.0
+radius = 20.0
+height = 60.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e468w"]
-radius = 64.0
-height = 192.0
+radius = 16.0
+height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3pha3"]
-radius = 64.0
-height = 192.0
+radius = 30.0
+height = 60.0
 
 [sub_resource type="Animation" id="Animation_0xuwx"]
 resource_name = "charging_N"
@@ -30,20 +31,32 @@ length = 2.0
 resource_name = "ram_N"
 loop_mode = 1
 
+[sub_resource type="Animation" id="Animation_2uthj"]
+resource_name = "walk_N"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_viykv"]
 _data = {
 "charging_N": SubResource("Animation_0xuwx"),
-"ram_N": SubResource("Animation_v8p27")
+"ram_N": SubResource("Animation_v8p27"),
+"walk_N": SubResource("Animation_2uthj")
 }
 
 [node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator")]
+collision_layer = 32
+collision_mask = 33
 motion_mode = 1
 script = ExtResource("1_02sjg")
 state_chart = NodePath("StateChart")
 animator = NodePath("Animator")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_xctnm")
+[node name="SpriteManager" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("2_cbvfo")
+
+[node name="WalkSprite2D" type="Sprite2D" parent="SpriteManager"]
+texture = ExtResource("3_a6i4y")
+hframes = 10
+vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_aqfp8")
