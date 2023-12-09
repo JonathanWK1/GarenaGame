@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=57 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
@@ -16,9 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://bbh0rt36mixvx" path="res://assets/images/player/player_second_attack.png" id="8_q3m0p"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="9_jwgyb"]
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="10_8ti4j"]
+[ext_resource type="Texture2D" uid="uid://byj4ju2o5pvqj" path="res://assets/images/player/player_parry.png" id="10_fhc6a"]
 [ext_resource type="Texture2D" uid="uid://bx7ogfhdx6wqq" path="res://assets/images/player/player_slash_1.png" id="11_glh26"]
 [ext_resource type="Script" path="res://src/components/animator.gd" id="12_flyqg"]
 [ext_resource type="Texture2D" uid="uid://dccy5x4pmpg1u" path="res://assets/images/player/player_slash_2.png" id="12_w5rre"]
+[ext_resource type="Script" path="res://src/player/parry_area.gd" id="13_hvm12"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="17_pxx20"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4pkr"]
@@ -28,6 +30,10 @@ radius = 12.0
 height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xwcmq"]
+radius = 32.0
+height = 128.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_44ipv"]
 radius = 32.0
 height = 128.0
 
@@ -127,6 +133,18 @@ tracks/7/path = NodePath("WeaponPivot/SecondSlashSprite2D:frame")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SpriteManager/ParrySprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -804,6 +822,118 @@ tracks/1/keys = {
 "values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 }
 
+[sub_resource type="Animation" id="Animation_kg0tj"]
+resource_name = "parry_S"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/ParrySprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 3, 4, 6, 9]
+}
+
+[sub_resource type="Animation" id="Animation_8bhrb"]
+resource_name = "parry_W"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/ParrySprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 13, 14, 16, 19]
+}
+
+[sub_resource type="Animation" id="Animation_6284k"]
+resource_name = "parry_N"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/ParrySprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 23, 24, 26, 29]
+}
+
+[sub_resource type="Animation" id="Animation_i30n6"]
+resource_name = "parry_E"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/ParrySprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [31, 33, 34, 36, 39]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_10qrs"]
 _data = {
 "RESET": SubResource("Animation_qai01"),
@@ -819,6 +949,10 @@ _data = {
 "idle_N": SubResource("Animation_e31n0"),
 "idle_S": SubResource("Animation_tugh8"),
 "idle_W": SubResource("Animation_7ogox"),
+"parry_E": SubResource("Animation_i30n6"),
+"parry_N": SubResource("Animation_6284k"),
+"parry_S": SubResource("Animation_kg0tj"),
+"parry_W": SubResource("Animation_8bhrb"),
 "second_attack_E": SubResource("Animation_ce65y"),
 "second_attack_N": SubResource("Animation_075oi"),
 "second_attack_S": SubResource("Animation_dx4w5"),
@@ -866,7 +1000,7 @@ _data = {
 "invulnerable": SubResource("Animation_dv0ff")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "invulnerable_anim_player", "hurtbox", "slash_sprites", "weapon_pivot", "weapon_hitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "invulnerable_anim_player", "hurtbox", "parry_area", "slash_sprites", "weapon_pivot", "weapon_hitbox")]
 collision_layer = 32
 collision_mask = 33
 motion_mode = 1
@@ -878,6 +1012,7 @@ trail_manager = NodePath("TrailManager")
 animator = NodePath("Animator")
 invulnerable_anim_player = NodePath("InvulnerableAnimationPlayer")
 hurtbox = NodePath("HurtBox")
+parry_area = NodePath("WeaponPivot/ParryArea")
 slash_sprites = [NodePath("WeaponPivot/FirstSlashSprite2D"), NodePath("WeaponPivot/SecondSlashSprite2D")]
 weapon_pivot = NodePath("WeaponPivot")
 weapon_hitbox = NodePath("WeaponPivot/HitBox")
@@ -927,6 +1062,12 @@ vframes = 4
 frame = 20
 metadata/_edit_lock_ = true
 
+[node name="ParrySprite2D" type="Sprite2D" parent="SpriteManager"]
+visible = false
+texture = ExtResource("10_fhc6a")
+hframes = 10
+vframes = 4
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_w4pkr")
@@ -955,6 +1096,18 @@ script = ExtResource("10_8ti4j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/HitBox"]
 shape = SubResource("CapsuleShape2D_xwcmq")
 disabled = true
+
+[node name="ParryArea" type="Area2D" parent="WeaponPivot"]
+position = Vector2(32, 0)
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("13_hvm12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/ParryArea"]
+shape = SubResource("CapsuleShape2D_44ipv")
+disabled = true
+debug_color = Color(0.74902, 0.709804, 0, 0.419608)
 
 [node name="FirstSlashSprite2D" type="Sprite2D" parent="WeaponPivot"]
 visible = false
@@ -1019,6 +1172,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Dash")
 event = &"dash"
 
+[node name="ToParry" type="Node" parent="StateChart/ParallelState/BehaviourStates/Normal"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Parry")
+event = &"parry"
+
 [node name="Attack" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")
 
@@ -1032,6 +1190,11 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Dash")
 event = &"dash"
 
+[node name="ToParry" type="Node" parent="StateChart/ParallelState/BehaviourStates/Attack"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Parry")
+event = &"parry"
+
 [node name="Dash" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
 script = ExtResource("5_apxxk")
 
@@ -1039,6 +1202,14 @@ script = ExtResource("5_apxxk")
 script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
 delay_seconds = 0.3
+
+[node name="Parry" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
+script = ExtResource("5_apxxk")
+
+[node name="ToNormal" type="Node" parent="StateChart/ParallelState/BehaviourStates/Parry"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Normal")
+delay_seconds = 0.5
 
 [node name="VulnerabilityStates" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("4_qfqkt")
@@ -1070,6 +1241,7 @@ delay_seconds = 2.0
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Parry" to="." method="_on_parry_state_entered"]
 [connection signal="state_entered" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_physics_processing"]

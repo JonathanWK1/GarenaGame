@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var animator: Animator
 @export var invulnerable_anim_player: AnimationPlayer
 @export var hurtbox: HurtBox
+@export var parry_area: ParryArea
 @export var slash_sprites: Array[Sprite2D] = []
 @export var weapon_pivot: Marker2D
 @export var weapon_hitbox: HitBox
@@ -61,6 +62,10 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 	if Input.is_action_just_pressed('attack'):
 		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
 		state_chart.send_event('attack')
+	
+	if Input.is_action_just_pressed('parry'):
+		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
+		state_chart.send_event('parry')
 #endregion
 
 
@@ -83,6 +88,12 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 		attack_queue = true
 		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
 		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed('parry'):
+		attack_queue = false
+		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
+		state_chart.send_event('parry')
+		get_viewport().set_input_as_handled()
 
 
 func _on_attack_state_exited() -> void:
@@ -96,7 +107,7 @@ func _on_attack_state_exited() -> void:
 func _on_dash_state_entered() -> void:
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
-	trail_manager.summon_trail(5, 0.3)
+	trail_manager.summon_trail(6, 0.3)
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
@@ -121,6 +132,16 @@ func _on_invulnerable_state_physics_processing(delta: float) -> void:
 
 func _on_invulnerable_state_exited() -> void:
 	hurtbox.enable()
+#endregion
+
+
+#region Parry State
+func _on_parry_state_entered() -> void:
+	animator.play_8_way_anim('parry', Vector2.RIGHT.rotated(weapon_rotation))
+	weapon_pivot.rotation = weapon_rotation
+	parry_area.enable()
+	await get_tree().create_timer(0.3).timeout
+	parry_area.disable()
 #endregion
 
 
