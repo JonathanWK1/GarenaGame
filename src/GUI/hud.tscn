@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdtsq602llvxy"]
 
-[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_sqlq0"]
+[ext_resource type="Texture2D" uid="uid://b5vitc2ups5eq" path="res://assets/images/GUI/heart.png" id="1_uunsx"]
 [ext_resource type="Script" path="res://src/GUI/hp_sprite.gd" id="1_vp602"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_mqbrf"]
 
@@ -14,27 +14,32 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 104.0
 
 [node name="HP1" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_sqlq0")
+texture = ExtResource("1_uunsx")
+stretch_mode = 2
 script = ExtResource("1_vp602")
 health = ExtResource("2_mqbrf")
 bound_value = 1
 
 [node name="HP2" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_sqlq0")
+texture = ExtResource("1_uunsx")
+stretch_mode = 2
 script = ExtResource("1_vp602")
 health = ExtResource("2_mqbrf")
 bound_value = 2
 
 [node name="HP3" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_sqlq0")
+texture = ExtResource("1_uunsx")
+stretch_mode = 2
 script = ExtResource("1_vp602")
 health = ExtResource("2_mqbrf")
 bound_value = 3

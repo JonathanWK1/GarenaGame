@@ -134,7 +134,6 @@ hframes = 10
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_tfhoi")
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -145,7 +144,6 @@ monitoring = false
 script = ExtResource("4_47o6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-visible = false
 shape = SubResource("CircleShape2D_dagof")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

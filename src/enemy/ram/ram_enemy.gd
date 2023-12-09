@@ -24,7 +24,7 @@ func _on_idle_state_entered() -> void:
 	var direction := Vector2.RIGHT.rotated(randf_range(-PI, PI))
 	animator.play_8_way_anim('walk', direction)
 	velocity = direction * idle_speed
-	await get_tree().create_timer(randf_range(1, 1)).timeout
+	await get_tree().create_timer(randf_range(1, 5)).timeout
 	state_chart.send_event('idle_finished')
 
 
