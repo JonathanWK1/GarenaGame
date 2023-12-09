@@ -33,6 +33,7 @@ var attack_queue := false
 var can_dash := true
 
 func _ready():
+	GlobalSignal.broadcast_player.emit(self)
 	GlobalSignal.arena_entered.connect(disable_trigger_speaker)
 	GlobalSignal.arena_finished.connect(enable_trigger_speaker)
 

@@ -9,19 +9,23 @@ extends Node2D
 var player_inside := false
 var clockwise_rotation := true
 
+func _ready():
+	GlobalSignal.broadcast_player.connect(set_player)
 
+func set_player(player:Player):
+	self.player = player
 func _physics_process(delta: float) -> void:
 	if clockwise_rotation:
-		global_rotation_degrees += rotation_speed * delta
+		rotation_degrees += rotation_speed * delta
 	else:
-		global_rotation_degrees -= rotation_speed * delta
+		rotation_degrees -= rotation_speed * delta
 	
-	if global_rotation_degrees < min_rotation:
+	if rotation_degrees < min_rotation:
 		clockwise_rotation = true
-	elif global_rotation_degrees > max_rotation:
+	elif rotation_degrees > max_rotation:
 		clockwise_rotation = false
 	
-	if player_inside and player.velocity.length() > 0.01:
+	if player_inside and player.velocity.length() > 0.05:
 		player.health.hp = 0
 
 

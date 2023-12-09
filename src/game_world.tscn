@@ -11,8 +11,10 @@ script = ExtResource("1_2amqc")
 [node name="Map" parent="." instance=ExtResource("1_semrt")]
 
 [node name="Player" parent="." instance=ExtResource("1_86jyw")]
+position = Vector2(923, 714)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(904, 875)
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("7_s6o3i")
