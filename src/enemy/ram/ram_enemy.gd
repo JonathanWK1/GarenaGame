@@ -8,6 +8,8 @@ extends Enemy
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
 
+var ram_time := 0.0
+
 
 func _ready() -> void:
 	super._ready()
@@ -42,9 +44,15 @@ func _on_ram_state_entered() -> void:
 	animator.play_8_way_anim('ram', v2)
 	velocity = Vector2.RIGHT.rotated(angle) * ram_speed
 	hitbox.enable()
+	ram_time = 2.0
 
 
 func _on_ram_state_physics_processing(delta: float) -> void:
+	ram_time -= delta
+	
+	if ram_time < 1.0:
+		velocity = velocity.normalized() * lerpf(0.1, ram_speed, ram_time)
+	
 	if move_and_slide():
 		state_chart.send_event('ram_collided')
 

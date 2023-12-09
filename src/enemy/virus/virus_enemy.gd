@@ -15,7 +15,6 @@ func _ready() -> void:
 
 
 func shoot() -> void:
-	print("SHOOT")
 	var bullet: Bullet = bullet_scn.instantiate()
 	get_parent().call_deferred("add_child", bullet)
 	bullet.set_deferred('global_position', global_position)
