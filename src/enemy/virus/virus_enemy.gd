@@ -1,6 +1,8 @@
 extends Enemy
 
 
+@export var sprite_shader: ShaderMaterial
+
 @export var bullet_scn: PackedScene
 
 @export var state_chart: StateChart
@@ -15,11 +17,10 @@ func _ready() -> void:
 
 
 func shoot() -> void:
-	print("SHOOT")
-	var bullet: CharacterBody2D = bullet_scn.instantiate()
+	var bullet: Bullet = bullet_scn.instantiate()
 	get_parent().call_deferred("add_child", bullet)
 	bullet.set_deferred('global_position', global_position)
-	bullet.initialize(randf_range(-PI, PI))
+	bullet.initialize(global_position.angle_to_point(target.global_position))
 
 
 #region Idle State
@@ -40,4 +41,8 @@ func _on_shooting_state_entered() -> void:
 
 
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
+	GlobalEffects.freeze_frame(0.2)
 	health.hp -= 1
+	await get_tree().create_timer(0.1).timeout
+	sprite_shader.set_shader_parameter('flash_modifier', 0.0)
