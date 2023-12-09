@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_mdg6v"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_4oxr5"]
 [ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="8_falhe"]
+[ext_resource type="Texture2D" uid="uid://bba358h7r7145" path="res://assets/images/particles/stunned_star.png" id="9_j5ys0"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_64haw"]
 particle_flag_disable_z = true
@@ -940,6 +941,12 @@ shape = SubResource("CircleShape2D_3leng")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
+[node name="StarSprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -28)
+texture = ExtResource("9_j5ys0")
+hframes = 11
+
 [node name="Animator" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_m88ow")
 animation_player = NodePath("../AnimationPlayer")
@@ -984,6 +991,14 @@ delay_seconds = 2.0
 script = ExtResource("6_4oxr5")
 to = NodePath("../../Idle")
 event = &"ram_collided"
+
+[node name="Stunned" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_mdg6v")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Stunned"]
+script = ExtResource("6_4oxr5")
+to = NodePath("../../Idle")
+delay_seconds = 2.0
 
 [connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
 [connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
