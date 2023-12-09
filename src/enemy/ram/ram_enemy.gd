@@ -9,6 +9,7 @@ extends Enemy
 
 
 func _ready() -> void:
+	super._ready()
 	health.hp = 5
 	health.dead.connect(queue_free)
 
@@ -31,7 +32,9 @@ func _on_charging_state_entered() -> void:
 
 #region Ram State
 func _on_ram_state_entered() -> void:
-	velocity = Vector2.RIGHT.rotated(randf_range(-PI, PI)) * ram_speed
+	var v2 = target.global_position - global_position
+	var angle = v2.angle()
+	velocity = Vector2.RIGHT.rotated(angle) * ram_speed
 
 
 func _on_ram_state_physics_processing(delta: float) -> void:
