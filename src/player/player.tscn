@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="3_2gqdx"]
-[ext_resource type="Texture2D" uid="uid://dben1vlab3evo" path="res://assets/images/player_walk.png" id="3_7wrg0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_regu6"]
-[ext_resource type="Texture2D" uid="uid://7ww2gd2spxmo" path="res://assets/images/player_idle.png" id="4_ldgpd"]
+[ext_resource type="Texture2D" uid="uid://7ww2gd2spxmo" path="res://assets/images/player/player_idle.png" id="4_6kogd"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_qfqkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_apxxk"]
-[ext_resource type="Texture2D" uid="uid://dusmf2n36fx2b" path="res://assets/images/player_dash.png" id="6_2yn07"]
+[ext_resource type="Texture2D" uid="uid://dben1vlab3evo" path="res://assets/images/player/player_walk.png" id="5_xg0co"]
+[ext_resource type="Texture2D" uid="uid://dusmf2n36fx2b" path="res://assets/images/player/player_dash.png" id="6_bt5dc"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_jtndr"]
-[ext_resource type="Texture2D" uid="uid://chnma18o7r3s2" path="res://assets/images/player_first_attack.png" id="7_guk1f"]
+[ext_resource type="Texture2D" uid="uid://chnma18o7r3s2" path="res://assets/images/player/player_first_attack.png" id="7_d18an"]
 [ext_resource type="Script" path="res://src/ghost_trail/trail_manager.gd" id="7_inbgf"]
-[ext_resource type="Texture2D" uid="uid://bbh0rt36mixvx" path="res://assets/images/player_second_attack.png" id="8_nopp1"]
+[ext_resource type="Texture2D" uid="uid://bbh0rt36mixvx" path="res://assets/images/player/player_second_attack.png" id="8_q3m0p"]
 [ext_resource type="Script" path="res://src/components/hurtbox.gd" id="9_jwgyb"]
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="10_8ti4j"]
 [ext_resource type="Script" path="res://src/components/animator.gd" id="12_flyqg"]
@@ -706,6 +706,8 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "hurtbox", "weapon_pivot", "weapon_hitbox")]
+collision_layer = 32
+collision_mask = 33
 motion_mode = 1
 script = ExtResource("1_ur3fd")
 state_chart = NodePath("StateChart")
@@ -721,28 +723,28 @@ position = Vector2(0, -29)
 script = ExtResource("3_2gqdx")
 
 [node name="IdleSprite2D" type="Sprite2D" parent="SpriteManager"]
-texture = ExtResource("4_ldgpd")
+texture = ExtResource("4_6kogd")
 hframes = 10
 vframes = 4
 metadata/_edit_lock_ = true
 
 [node name="WalkSprite2D" type="Sprite2D" parent="SpriteManager"]
 visible = false
-texture = ExtResource("3_7wrg0")
+texture = ExtResource("5_xg0co")
 hframes = 10
 vframes = 4
 metadata/_edit_lock_ = true
 
 [node name="DashSprite2D" type="Sprite2D" parent="SpriteManager"]
 visible = false
-texture = ExtResource("6_2yn07")
+texture = ExtResource("6_bt5dc")
 hframes = 10
 vframes = 4
 metadata/_edit_lock_ = true
 
 [node name="FirstAttackSprite2D" type="Sprite2D" parent="SpriteManager"]
 visible = false
-texture = ExtResource("7_guk1f")
+texture = ExtResource("7_d18an")
 hframes = 10
 vframes = 4
 frame = 20
@@ -750,7 +752,7 @@ metadata/_edit_lock_ = true
 
 [node name="SecondAttackSprite2D" type="Sprite2D" parent="SpriteManager"]
 visible = false
-texture = ExtResource("8_nopp1")
+texture = ExtResource("8_q3m0p")
 hframes = 10
 vframes = 4
 frame = 20
@@ -783,6 +785,7 @@ script = ExtResource("10_8ti4j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/HitBox"]
 shape = SubResource("CapsuleShape2D_3s14u")
+disabled = true
 
 [node name="TriggerArea" type="Area2D" parent="."]
 position = Vector2(0, -16)
