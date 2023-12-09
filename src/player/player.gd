@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+class_name Player
 
 @export var health: Health
 @export var sprite_shader: ShaderMaterial

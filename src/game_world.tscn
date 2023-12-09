@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=10 format=3 uid="uid://bq5ts738kbc3x"]
 
+[ext_resource type="Script" path="res://src/game_world.gd" id="1_2amqc"]
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
 [ext_resource type="PackedScene" uid="uid://brrg3g311unsc" path="res://src/tile_map/map.tscn" id="1_semrt"]
 [ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="2_x1m5l"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" path="res://src/Camera/Camera2D.gd" id="7_s6o3i"]
 
 [node name="GameWorld" type="Node2D"]
+script = ExtResource("1_2amqc")
 
 [node name="Map" parent="." instance=ExtResource("1_semrt")]
 
