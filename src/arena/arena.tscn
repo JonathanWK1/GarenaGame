@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dptcg7pk21lxl"]
+
+[ext_resource type="Script" path="res://src/arena/arena.gd" id="1_miww3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ebd7"]
+size = Vector2(1280, 720)
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_miww3")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_8ebd7")
+
+[connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]

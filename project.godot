@@ -66,3 +66,4 @@ dash={
 2d_physics/layer_2="player_hurtbox"
 2d_physics/layer_3="enemy_hurtbox"
 2d_physics/layer_4="npc_trigger"
+2d_physics/layer_5="arena_trigger"

@@ -5,8 +5,6 @@ class_name HitBox
 
 signal hurt_box_detected(hurt_box)
 
-var group_name := ""
-
 
 func enable() -> void:
 	for child in get_children():
@@ -22,6 +20,6 @@ func disable() -> void:
 		(child as CollisionShape2D).set_deferred("disabled", true)
 
 
-func _on_area_entered(area: HurtBox) -> void:
-	if area.group_name != group_name:
-		hurt_box_detected.emit(area)
+func _on_area_entered(hurtbox: HurtBox) -> void:
+	hurt_box_detected.emit(hurtbox)
+	hurtbox.got_hit(global_position)

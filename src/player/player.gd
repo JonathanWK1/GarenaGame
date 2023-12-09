@@ -3,8 +3,9 @@ extends CharacterBody2D
 
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager
-@export var animator: PlayerAnimator
+@export var animator: Animator
 @export var health: Health
+@export var hurtbox: HurtBox
 
 @export var weapon_pivot: Marker2D
 @export var weapon_hitbox: HitBox
@@ -86,11 +87,16 @@ func _on_to_normal_taken() -> void:
 
 #region Dash State
 func _on_dash_state_entered() -> void:
+	hurtbox.disable()
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
-	trail_manager.summon_trail(4, 0.3)
+	trail_manager.summon_trail(5, 0.3)
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
 	move_and_slide()
+
+
+func _on_dash_state_exited() -> void:
+	hurtbox.enable()
 #endregion

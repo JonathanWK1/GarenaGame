@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=3 uid="uid://binqsx11r7f0n"]
+
+[ext_resource type="Script" path="res://src/enemy/ram/ram_enemy.gd" id="1_02sjg"]
+[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_xctnm"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="2_eq6eu"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="3_kv616"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_vnsqh"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_dw7se"]
+[ext_resource type="Script" path="res://src/components/animator.gd" id="4_m88ow"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_mdg6v"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_4oxr5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aqfp8"]
+radius = 40.0
+height = 100.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e468w"]
+radius = 64.0
+height = 192.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3pha3"]
+radius = 64.0
+height = 192.0
+
+[sub_resource type="Animation" id="Animation_0xuwx"]
+resource_name = "charging_N"
+length = 2.0
+
+[sub_resource type="Animation" id="Animation_v8p27"]
+resource_name = "ram_N"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_viykv"]
+_data = {
+"charging_N": SubResource("Animation_0xuwx"),
+"ram_N": SubResource("Animation_v8p27")
+}
+
+[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator")]
+motion_mode = 1
+script = ExtResource("1_02sjg")
+state_chart = NodePath("StateChart")
+animator = NodePath("Animator")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xctnm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_aqfp8")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_kv616")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_e468w")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("2_eq6eu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_3pha3")
+disabled = true
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Animator" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_m88ow")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_viykv")
+}
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_vnsqh")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_dw7se")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_mdg6v")
+
+[node name="ToCharging" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("6_4oxr5")
+to = NodePath("../../Charging")
+event = &"idle_finished"
+
+[node name="Charging" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_mdg6v")
+
+[node name="ToRam" type="Node" parent="StateChart/Root/Charging"]
+script = ExtResource("6_4oxr5")
+to = NodePath("../../Ram")
+delay_seconds = 2.0
+
+[node name="Ram" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_mdg6v")
+
+[node name="ToIdleTimed" type="Node" parent="StateChart/Root/Ram"]
+script = ExtResource("6_4oxr5")
+to = NodePath("../../Idle")
+delay_seconds = 5.0
+
+[node name="ToIdleCollided" type="Node" parent="StateChart/Root/Ram"]
+script = ExtResource("6_4oxr5")
+to = NodePath("../../Idle")
+event = &"ram_collided"
+
+[connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
+[connection signal="hurt_box_detected" from="HitBox" to="." method="_on_hit_box_hurt_box_detected"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Charging" to="." method="_on_charging_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Ram" to="." method="_on_ram_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Ram" to="." method="_on_ram_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/Root/Ram" to="." method="_on_ram_state_physics_processing"]
