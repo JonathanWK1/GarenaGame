@@ -976,6 +976,7 @@ to = NodePath("../../Idle")
 event = &"ram_collided"
 
 [connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]
 [connection signal="hurt_box_detected" from="HitBox" to="." method="_on_hit_box_hurt_box_detected"]
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
