@@ -4,4 +4,5 @@
 
 [resource]
 default_font_size = 10
+Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("1_syyd8")
