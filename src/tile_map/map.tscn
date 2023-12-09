@@ -890,8 +890,12 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="NPC2" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
-position = Vector2(10946, 1602)
-text = "Congratulations! You have successfully completed the trial. Please proceed to the gate."
+position = Vector2(10944, 1662)
+text = "Congratulations! You have successfully completed the trial. Enjoy your freedom!"
+metadata/_edit_group_ = true
+
+[node name="Sprite" parent="SpeakerContainer/NPC2" index="2"]
+texture = ExtResource("15_ars2r")
 
 [node name="InfoRam" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(5888, 3414)
@@ -1220,50 +1224,66 @@ texture = ExtResource("22_8elu7")
 
 [node name="InfoRamDecorations" type="Node2D" parent="."]
 
-[node name="Table" type="Sprite2D" parent="."]
+[node name="Table" type="Sprite2D" parent="InfoRamDecorations"]
 position = Vector2(5824, 3278)
 texture = ExtResource("20_r0d3m")
 metadata/_edit_group_ = true
 
-[node name="Paper2" type="Sprite2D" parent="Table"]
+[node name="Paper2" type="Sprite2D" parent="InfoRamDecorations/Table"]
 position = Vector2(-24, -8)
 texture = ExtResource("24_bhve6")
 
-[node name="Paper" type="Sprite2D" parent="Table"]
+[node name="Paper" type="Sprite2D" parent="InfoRamDecorations/Table"]
 position = Vector2(8, 8)
 texture = ExtResource("21_trmyk")
 
-[node name="Table2" type="Sprite2D" parent="."]
+[node name="Table2" type="Sprite2D" parent="InfoRamDecorations"]
 position = Vector2(5952, 3278)
 texture = ExtResource("20_r0d3m")
 metadata/_edit_group_ = true
 
-[node name="Book2" type="Sprite2D" parent="Table2"]
+[node name="Book2" type="Sprite2D" parent="InfoRamDecorations/Table2"]
 texture = ExtResource("25_fs3ud")
 
-[node name="Table3" type="Sprite2D" parent="."]
+[node name="Table3" type="Sprite2D" parent="InfoRamDecorations"]
 position = Vector2(5824, 4030)
 texture = ExtResource("20_r0d3m")
 metadata/_edit_group_ = true
 
-[node name="Book2" type="Sprite2D" parent="Table3"]
+[node name="Book2" type="Sprite2D" parent="InfoRamDecorations/Table3"]
 position = Vector2(-8, -16)
 texture = ExtResource("25_fs3ud")
 
-[node name="Book" type="Sprite2D" parent="Table3"]
+[node name="Book" type="Sprite2D" parent="InfoRamDecorations/Table3"]
 position = Vector2(16, 16)
 texture = ExtResource("26_q4n1w")
 
-[node name="Table4" type="Sprite2D" parent="."]
+[node name="Table4" type="Sprite2D" parent="InfoRamDecorations"]
 position = Vector2(5824, 3774)
 texture = ExtResource("20_r0d3m")
 
-[node name="Computer" type="Sprite2D" parent="."]
+[node name="Computer" type="Sprite2D" parent="InfoRamDecorations"]
 position = Vector2(5824, 3774)
+texture = ExtResource("22_8elu7")
+
+[node name="EndDecorations" type="Node2D" parent="."]
+
+[node name="Table" type="Sprite2D" parent="EndDecorations"]
+position = Vector2(10944, 1534)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="EndDecorations/Table"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndDecorations/Table/StaticBody2D"]
+shape = SubResource("RectangleShape2D_cf4bj")
+
+[node name="Computer" type="Sprite2D" parent="EndDecorations/Table"]
 texture = ExtResource("22_8elu7")
 
 [editable path="SpeakerContainer/NPC1"]
 [editable path="SpeakerContainer/TimedDoor"]
+[editable path="SpeakerContainer/NPC2"]
 [editable path="SpeakerContainer/InfoRam"]
 [editable path="SpeakerContainer/InfoRam3"]
 [editable path="SpeakerContainer/InfoCam"]
