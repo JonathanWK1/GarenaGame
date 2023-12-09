@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnp6pw8ux11y"]
+[gd_scene load_steps=4 format=3 uid="uid://dnp6pw8ux11y"]
 
 [ext_resource type="Script" path="res://src/speaker/speaker.gd" id="1_8sa5y"]
+[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="2_04kt1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujtca"]
 radius = 64.0
@@ -43,6 +44,10 @@ text = "lorem ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_04kt1")
 
 [connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]
 [connection signal="area_exited" from="TriggerArea" to="." method="_on_trigger_area_area_exited"]

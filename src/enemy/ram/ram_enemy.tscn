@@ -36,11 +36,21 @@ _data = {
 "ram_N": SubResource("Animation_v8p27")
 }
 
-[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator")]
+[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "label")]
 motion_mode = 1
 script = ExtResource("1_02sjg")
 state_chart = NodePath("StateChart")
 animator = NodePath("Animator")
+label = NodePath("HealthLabel")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -101.0
+offset_top = -134.0
+offset_right = 99.0
+offset_bottom = -111.0
+text = "a"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xctnm")
