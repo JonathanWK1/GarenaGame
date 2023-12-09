@@ -100,3 +100,8 @@ func _on_dash_state_physics_processing(delta: float) -> void:
 func _on_dash_state_exited() -> void:
 	hurtbox.enable()
 #endregion
+
+
+func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	GlobalEffects.freeze_frame(1.0)
+	health.hp -= 1

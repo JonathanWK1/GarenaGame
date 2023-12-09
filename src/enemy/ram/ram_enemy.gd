@@ -45,6 +45,7 @@ func _on_ram_state_exited() -> void:
 
 
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	GlobalEffects.freeze_frame(0.2)
 	health.hp -= 1
 
 
