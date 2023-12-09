@@ -22,7 +22,7 @@ position = Vector2(177, 21)
 position = Vector2(-157, 67)
 
 [node name="Arena" parent="." node_paths=PackedStringArray("spawners") instance=ExtResource("3_da2vo")]
-position = Vector2(1112, 84)
+position = Vector2(2985, -1370)
 spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3")]
 
 [node name="EnemySpawner" type="Marker2D" parent="Arena"]
@@ -41,5 +41,7 @@ script = ExtResource("4_p808p")
 enemy_scn = ExtResource("3_xcidh")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+limit_smoothed = true
+position_smoothing_enabled = true
 script = ExtResource("7_s6o3i")
 player = NodePath("../Player")
