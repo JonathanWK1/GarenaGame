@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var health: Health
 
 @export var weapon_pivot: Marker2D
-@export var weapon_collision: CollisionShape2D
+@export var weapon_hitbox: HitBox
 
 @export var speed := 350.0
 @export var friction := 0.8
@@ -41,7 +41,7 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 		animator.play_8_way_anim('walk', direction)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
-		animator.play_8_way_anim('idle', direction)
+		animator.play_8_way_anim('idle')
 	move_and_slide()
 	
 	if Input.is_action_just_pressed('attack'):
@@ -52,8 +52,10 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 
 #region Attack State
 func _on_attack_state_entered() -> void:
+	print(Vector2.RIGHT.rotated(weapon_rotation))
+	animator.play_8_way_anim('first_attack', Vector2.RIGHT.rotated(weapon_rotation))
 	weapon_pivot.rotation = weapon_rotation
-	weapon_collision.disabled = false
+	weapon_hitbox.enable()
 
 
 func _on_attack_state_unhandled_input(event: InputEvent) -> void:
@@ -64,7 +66,7 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 
 
 func _on_attack_state_exited() -> void:
-	weapon_collision.disabled = true
+	weapon_hitbox.disable()
 #endregion
 
 

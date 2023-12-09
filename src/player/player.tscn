@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=43 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
@@ -11,7 +11,11 @@
 [ext_resource type="Script" path="res://src/player/player_animator.gd" id="5_qqw3h"]
 [ext_resource type="Texture2D" uid="uid://dusmf2n36fx2b" path="res://assets/images/player_dash.png" id="6_2yn07"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_jtndr"]
+[ext_resource type="Texture2D" uid="uid://chnma18o7r3s2" path="res://assets/images/player_first_attack.png" id="7_guk1f"]
 [ext_resource type="Script" path="res://src/ghost_trail/trail_manager.gd" id="7_inbgf"]
+[ext_resource type="Texture2D" uid="uid://bbh0rt36mixvx" path="res://assets/images/player_second_attack.png" id="8_nopp1"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="9_jwgyb"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="10_8ti4j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4pkr"]
 
@@ -19,9 +23,12 @@
 radius = 12.0
 height = 36.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v3640"]
-radius = 20.0
-height = 60.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3s14u"]
+radius = 16.0
+height = 52.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0au8s"]
+radius = 32.0
 
 [sub_resource type="Animation" id="Animation_qai01"]
 length = 0.001
@@ -72,6 +79,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpriteManager/FirstAttackSprite2D:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SpriteManager/SecondAttackSprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
 }
 
 [sub_resource type="Animation" id="Animation_i51sj"]
@@ -187,6 +218,122 @@ tracks/1/keys = {
 "values": [2]
 }
 
+[sub_resource type="Animation" id="Animation_mnkiu"]
+resource_name = "first_attack_E"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/FirstAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 32, 34, 36, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_43kvh"]
+resource_name = "first_attack_N"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/FirstAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 22, 24, 26, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_e06lm"]
+resource_name = "first_attack_S"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/FirstAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 4, 6, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_yfowl"]
+resource_name = "first_attack_W"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/FirstAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 12, 14, 16, 18, 19]
+}
+
 [sub_resource type="Animation" id="Animation_ogbqt"]
 resource_name = "idle_E"
 loop_mode = 1
@@ -295,6 +442,122 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_ce65y"]
+resource_name = "second_attack_E"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/SecondAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 32, 34, 36, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_075oi"]
+resource_name = "second_attack_N"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/SecondAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 22, 24, 26, 28, 29]
+}
+
+[sub_resource type="Animation" id="Animation_dx4w5"]
+resource_name = "second_attack_S"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/SecondAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 4, 6, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_7hbvt"]
+resource_name = "second_attack_W"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteManager:current_sprite_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteManager/SecondAttackSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 12, 14, 16, 18, 19]
 }
 
 [sub_resource type="Animation" id="Animation_xdjoa"]
@@ -424,17 +687,25 @@ _data = {
 "dash_N": SubResource("Animation_ieyub"),
 "dash_S": SubResource("Animation_f3gi6"),
 "dash_W": SubResource("Animation_nvdxj"),
+"first_attack_E": SubResource("Animation_mnkiu"),
+"first_attack_N": SubResource("Animation_43kvh"),
+"first_attack_S": SubResource("Animation_e06lm"),
+"first_attack_W": SubResource("Animation_yfowl"),
 "idle_E": SubResource("Animation_ogbqt"),
 "idle_N": SubResource("Animation_e31n0"),
 "idle_S": SubResource("Animation_tugh8"),
 "idle_W": SubResource("Animation_7ogox"),
+"second_attack_E": SubResource("Animation_ce65y"),
+"second_attack_N": SubResource("Animation_075oi"),
+"second_attack_S": SubResource("Animation_dx4w5"),
+"second_attack_W": SubResource("Animation_7hbvt"),
 "walk_E": SubResource("Animation_xdjoa"),
 "walk_N": SubResource("Animation_w0sy2"),
 "walk_S": SubResource("Animation_psnkr"),
 "walk_W": SubResource("Animation_5h400")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "weapon_pivot", "weapon_collision")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "weapon_pivot", "weapon_hitbox")]
 motion_mode = 1
 script = ExtResource("1_ur3fd")
 state_chart = NodePath("StateChart")
@@ -442,7 +713,7 @@ trail_manager = NodePath("TrailManager")
 animator = NodePath("PlayerAnimator")
 health = ExtResource("2_7j3iq")
 weapon_pivot = NodePath("WeaponPivot")
-weapon_collision = NodePath("WeaponPivot/HitBox/CollisionShape2D")
+weapon_hitbox = NodePath("WeaponPivot/HitBox")
 
 [node name="SpriteManager" type="Node2D" parent="."]
 position = Vector2(0, -29)
@@ -468,6 +739,22 @@ hframes = 10
 vframes = 4
 metadata/_edit_lock_ = true
 
+[node name="FirstAttackSprite2D" type="Sprite2D" parent="SpriteManager"]
+visible = false
+texture = ExtResource("7_guk1f")
+hframes = 10
+vframes = 4
+frame = 20
+metadata/_edit_lock_ = true
+
+[node name="SecondAttackSprite2D" type="Sprite2D" parent="SpriteManager"]
+visible = false
+texture = ExtResource("8_nopp1")
+hframes = 10
+vframes = 4
+frame = 20
+metadata/_edit_lock_ = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_w4pkr")
@@ -477,6 +764,7 @@ metadata/_edit_lock_ = true
 collision_layer = 2
 collision_mask = 0
 monitoring = false
+script = ExtResource("9_jwgyb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -20)
@@ -484,18 +772,25 @@ shape = SubResource("CapsuleShape2D_v30dy")
 
 [node name="WeaponPivot" type="Marker2D" parent="."]
 position = Vector2(0, -25)
-rotation = 0.837758
 
 [node name="HitBox" type="Area2D" parent="WeaponPivot"]
 position = Vector2(32, 0)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
+script = ExtResource("10_8ti4j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPivot/HitBox"]
-shape = SubResource("CapsuleShape2D_v3640")
-disabled = true
-metadata/_edit_lock_ = true
+shape = SubResource("CapsuleShape2D_3s14u")
+
+[node name="SpeakerTriggerArea" type="Area2D" parent="."]
+position = Vector2(0, -16)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeakerTriggerArea"]
+shape = SubResource("CircleShape2D_0au8s")
 
 [node name="TrailManager" type="Node" parent="." node_paths=PackedStringArray("body", "sprite")]
 script = ExtResource("7_inbgf")
@@ -538,7 +833,7 @@ script = ExtResource("5_apxxk")
 [node name="ToNormal" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
-delay_seconds = 0.2
+delay_seconds = 0.3
 
 [node name="ToDash" type="Node" parent="StateChart/Root/Attack"]
 script = ExtResource("6_jtndr")

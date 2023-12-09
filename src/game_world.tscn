@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=3 format=3 uid="uid://bq5ts738kbc3x"]
 
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
+[ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="2_x1m5l"]
 
 [node name="GameWorld" type="Node2D"]
 
@@ -8,3 +9,9 @@
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
+
+[node name="Speaker" parent="." instance=ExtResource("2_x1m5l")]
+position = Vector2(177, 21)
+
+[node name="Speaker2" parent="." instance=ExtResource("2_x1m5l")]
+position = Vector2(-157, 67)

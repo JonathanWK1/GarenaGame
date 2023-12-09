@@ -18,6 +18,8 @@ func _ready() -> void:
 # NOTE: Might be better to create custom method for all animations
 ## anim_name must be valid animation
 func play_8_way_anim(anim_name: String, direction := look_direction) -> void:
+	look_direction = direction
+	
 	var dir_angle := int(rad_to_deg(direction.angle() + PI)) % 360
 	dir_angle += 23
 	dir_angle /= 45
