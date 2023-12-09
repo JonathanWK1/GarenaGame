@@ -77,6 +77,7 @@ func _on_attack_state_entered() -> void:
 	weapon_pivot.rotation = weapon_rotation
 	weapon_hitbox.enable()
 	attack_combo ^= 1
+	velocity = Vector2.RIGHT.rotated(weapon_rotation) * speed
 
 
 func _on_attack_state_unhandled_input(event: InputEvent) -> void:
@@ -95,6 +96,11 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
 		state_chart.send_event('parry')
 		get_viewport().set_input_as_handled()
+
+
+func _on_attack_state_physics_processing(delta: float) -> void:
+	velocity = velocity.lerp(Vector2.ZERO, 0.2)
+	move_and_slide()
 
 
 func _on_attack_state_exited() -> void:
