@@ -1,18 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq5ts738kbc3x"]
+[gd_scene load_steps=8 format=3 uid="uid://bq5ts738kbc3x"]
 
 [ext_resource type="PackedScene" uid="uid://ccl0sxy7wkbj6" path="res://src/player/player.tscn" id="1_86jyw"]
+[ext_resource type="PackedScene" uid="uid://brrg3g311unsc" path="res://src/tile_map/map.tscn" id="1_semrt"]
 [ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="2_x1m5l"]
 [ext_resource type="PackedScene" uid="uid://dptcg7pk21lxl" path="res://src/arena/arena.tscn" id="3_da2vo"]
 [ext_resource type="PackedScene" uid="uid://binqsx11r7f0n" path="res://src/enemy/ram/ram_enemy.tscn" id="3_xcidh"]
 [ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_p808p"]
+[ext_resource type="Script" path="res://src/Camera/Camera2D.gd" id="7_s6o3i"]
 [ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="5_7oqqq"]
 
 [node name="GameWorld" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_86jyw")]
+[node name="Map" parent="." instance=ExtResource("1_semrt")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+[node name="Player" parent="." instance=ExtResource("1_86jyw")]
 
 [node name="Speaker" parent="." instance=ExtResource("2_x1m5l")]
 position = Vector2(177, 21)
@@ -21,9 +22,8 @@ position = Vector2(177, 21)
 position = Vector2(-157, 67)
 
 [node name="Arena" parent="." node_paths=PackedStringArray("spawners") instance=ExtResource("3_da2vo")]
-position = Vector2(915, 186)
+position = Vector2(1112, 84)
 spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3")]
-metadata/_edit_lock_ = true
 
 [node name="EnemySpawner" type="Marker2D" parent="Arena"]
 position = Vector2(-103, 178)
@@ -39,3 +39,7 @@ enemy_scn = ExtResource("3_xcidh")
 position = Vector2(-127, -40)
 script = ExtResource("4_p808p")
 enemy_scn = ExtResource("3_xcidh")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("7_s6o3i")
+player = NodePath("../Player")

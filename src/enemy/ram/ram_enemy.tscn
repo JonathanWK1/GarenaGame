@@ -41,13 +41,21 @@ _data = {
 "walk_N": SubResource("Animation_2uthj")
 }
 
-[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator")]
-collision_layer = 32
-collision_mask = 33
+[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "label")]
 motion_mode = 1
 script = ExtResource("1_02sjg")
 state_chart = NodePath("StateChart")
 animator = NodePath("Animator")
+label = NodePath("HealthLabel")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -101.0
+offset_top = -134.0
+offset_right = 99.0
+offset_bottom = -111.0
+text = "a"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpriteManager" type="Node2D" parent="."]
 scale = Vector2(2, 2)
