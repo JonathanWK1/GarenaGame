@@ -13,7 +13,7 @@ var laser_target := Vector2.ZERO
 
 
 func _ready() -> void:
-	health.hp = 2
+	health.hp = 5
 	health.dead.connect(queue_free)
 
 

@@ -6,6 +6,8 @@ extends Enemy
 @export var state_chart: StateChart
 @export var animator: Animator
 @export var hitbox: HitBox
+@export var dust_particle: GPUParticles2D
+@export var charge_particle: GPUParticles2D
 
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
@@ -46,6 +48,7 @@ func _on_ram_state_entered() -> void:
 	animator.play_8_way_anim('ram', v2)
 	velocity = Vector2.RIGHT.rotated(angle) * ram_speed
 	hitbox.enable()
+	charge_particle.emitting = true
 	ram_time = 2.0
 
 
@@ -61,6 +64,8 @@ func _on_ram_state_physics_processing(delta: float) -> void:
 
 func _on_ram_state_exited() -> void:
 	hitbox.disable()
+	dust_particle.emitting = false
+	charge_particle.emitting = false
 #endregion
 
 

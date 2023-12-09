@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brrg3g311unsc"]
+[gd_scene load_steps=13 format=3 uid="uid://brrg3g311unsc"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_8pqtf"]
 [ext_resource type="Texture2D" uid="uid://bgwbej76bxrc7" path="res://assets/images/Tilemap/tile.png" id="1_21evs"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dptcg7pk21lxl" path="res://src/arena/arena.tscn" id="3_g31yq"]
 [ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_awdip"]
 [ext_resource type="PackedScene" uid="uid://binqsx11r7f0n" path="res://src/enemy/ram/ram_enemy.tscn" id="5_3vnhk"]
+[ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="7_21y8t"]
 [ext_resource type="PackedScene" uid="uid://ciko4rr4a3h2f" path="res://src/enemy/laser/laser_enemy.tscn" id="7_63ley"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1el7k"]
@@ -691,7 +692,7 @@ enemy_scn = ExtResource("5_3vnhk")
 [node name="EnemySpawner3" type="Marker2D" parent="ArenaContainer/Arena"]
 position = Vector2(262, -317)
 script = ExtResource("4_awdip")
-enemy_scn = ExtResource("5_3vnhk")
+enemy_scn = ExtResource("7_21y8t")
 
 [node name="EnemySpawner4" type="Marker2D" parent="ArenaContainer/Arena"]
 position = Vector2(290, 251)

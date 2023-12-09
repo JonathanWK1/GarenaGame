@@ -107,8 +107,8 @@ angle_max = 360.0
 radial_velocity_min = -200.0
 radial_velocity_max = -150.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.2
+scale_min = 0.3
+scale_max = 0.5
 color = Color(0.780392, 0.780392, 1, 1)
 hue_variation_max = 0.2
 
@@ -152,6 +152,7 @@ libraries = {
 }
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
 position = Vector2(0, -10)
 emitting = false
 amount = 32
