@@ -1211,6 +1211,14 @@ script = ExtResource("6_jtndr")
 to = NodePath("../../Normal")
 delay_seconds = 0.5
 
+[node name="Staggered" type="Node" parent="StateChart/ParallelState/BehaviourStates"]
+script = ExtResource("5_apxxk")
+
+[node name="ToNormal" type="Node" parent="StateChart/ParallelState/BehaviourStates/Staggered"]
+script = ExtResource("6_jtndr")
+to = NodePath("../../Normal")
+delay_seconds = 0.5
+
 [node name="VulnerabilityStates" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("4_qfqkt")
 initial_state = NodePath("Vulnerable")
@@ -1237,11 +1245,15 @@ delay_seconds = 2.0
 [connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Normal" to="." method="_on_normal_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_physics_processing"]
 [connection signal="state_unhandled_input" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_unhandled_input"]
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Dash" to="." method="_on_dash_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Parry" to="." method="_on_parry_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Staggered" to="." method="_on_staggered_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/BehaviourStates/Staggered" to="." method="_on_staggered_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Staggered" to="." method="_on_staggered_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/VulnerabilityStates/Invulnerable" to="." method="_on_invulnerable_state_physics_processing"]

@@ -22,6 +22,7 @@ class_name Player
 @export var dash_speed := 1000.0
 
 var direction := Vector2.ZERO
+var attacked_direction := Vector2.ZERO
 
 var weapon_rotation := 0.0
 var attack_combo := 0
@@ -77,6 +78,7 @@ func _on_attack_state_entered() -> void:
 	weapon_pivot.rotation = weapon_rotation
 	weapon_hitbox.enable()
 	attack_combo ^= 1
+	velocity = Vector2.RIGHT.rotated(weapon_rotation) * speed
 
 
 func _on_attack_state_unhandled_input(event: InputEvent) -> void:
@@ -95,6 +97,11 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
 		state_chart.send_event('parry')
 		get_viewport().set_input_as_handled()
+
+
+func _on_attack_state_physics_processing(delta: float) -> void:
+	velocity = velocity.lerp(Vector2.ZERO, 0.2)
+	move_and_slide()
 
 
 func _on_attack_state_exited() -> void:
@@ -146,10 +153,26 @@ func _on_parry_state_entered() -> void:
 #endregion
 
 
+#region Staggered State
+func _on_staggered_state_entered() -> void:
+	pass
+
+
+func _on_staggered_state_physics_processing(delta: float) -> void:
+	pass # Replace with function body.
+
+
+func _on_staggered_state_exited() -> void:
+	pass # Replace with function body.
+#endregion
+
+
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	attacked_direction = attack_position - global_position
 	state_chart.send_event('hurt')
 	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
 	GlobalEffects.freeze_frame(0.5)
 	health.hp -= 1
 	await get_tree().create_timer(0.05).timeout
 	sprite_shader.set_shader_parameter('flash_modifier', 0.0)
+
