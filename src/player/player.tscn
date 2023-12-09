@@ -1074,6 +1074,7 @@ shape = SubResource("CircleShape2D_w4pkr")
 metadata/_edit_lock_ = true
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 0
 monitoring = false
@@ -1087,6 +1088,7 @@ shape = SubResource("CapsuleShape2D_v30dy")
 position = Vector2(0, -25)
 
 [node name="HitBox" type="Area2D" parent="WeaponPivot"]
+visible = false
 position = Vector2(32, 0)
 collision_layer = 0
 collision_mask = 4
@@ -1098,6 +1100,7 @@ shape = SubResource("CapsuleShape2D_xwcmq")
 disabled = true
 
 [node name="ParryArea" type="Area2D" parent="WeaponPivot"]
+visible = false
 position = Vector2(32, 0)
 collision_layer = 64
 collision_mask = 0
@@ -1121,13 +1124,23 @@ rotation = -1.5708
 texture = ExtResource("12_w5rre")
 hframes = 4
 
-[node name="TriggerArea" type="Area2D" parent="."]
-position = Vector2(0, -16)
-collision_layer = 24
+[node name="TriggerAreaArena" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -32)
+collision_layer = 16
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerAreaArena"]
+shape = SubResource("CircleShape2D_0au8s")
+
+[node name="TriggerAreaSpeaker" type="Area2D" parent="."]
+position = Vector2(0, -16)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerAreaSpeaker"]
 shape = SubResource("CircleShape2D_0au8s")
 
 [node name="TrailManager" type="Node" parent="." node_paths=PackedStringArray("body", "sprite")]

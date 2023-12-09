@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_jca0q")
+max_hp = 3
 hp = 3

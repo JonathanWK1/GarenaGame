@@ -16,7 +16,6 @@ func set_target(arena : Node2D):
 
 func set_target_to_player():
 	target = player
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	global_position = target.global_position;
-	pass

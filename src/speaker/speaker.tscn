@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnp6pw8ux11y"]
+[gd_scene load_steps=5 format=3 uid="uid://dnp6pw8ux11y"]
 
 [ext_resource type="Script" path="res://src/speaker/speaker.gd" id="1_8sa5y"]
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="2_04kt1"]
+[ext_resource type="FontFile" uid="uid://dtbup7k4w1kiw" path="res://assets/font/PrStart.ttf" id="2_72601"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujtca"]
-radius = 64.0
+radius = 80.0
 
 [node name="Speaker" type="Node2D" node_paths=PackedStringArray("to_show")]
 script = ExtResource("1_8sa5y")
@@ -25,10 +26,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -140.0
-offset_right = 94.0
-offset_bottom = -71.0
+offset_left = -206.0
+offset_top = -290.0
+offset_right = 212.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.364706, 0.364706, 0.364706, 1)
@@ -40,9 +41,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_72601")
 text = "lorem ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="Icon" type="Sprite2D" parent="."]

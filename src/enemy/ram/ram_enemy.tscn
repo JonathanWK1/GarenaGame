@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://binqsx11r7f0n"]
+[gd_scene load_steps=34 format=3 uid="uid://binqsx11r7f0n"]
 
 [ext_resource type="Script" path="res://src/enemy/ram/ram_enemy.gd" id="1_02sjg"]
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_cbvfo"]
@@ -26,7 +26,7 @@ scale_min = 0.1
 scale_max = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00gcm"]
-size = Vector2(32, 48)
+size = Vector2(41, 58)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e468w"]
 radius = 24.0
@@ -913,7 +913,7 @@ vframes = 4
 frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -10)
+position = Vector2(0.5, -5)
 shape = SubResource("RectangleShape2D_00gcm")
 
 [node name="HurtBox" type="Area2D" parent="."]
