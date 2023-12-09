@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://binqsx11r7f0n"]
+[gd_scene load_steps=35 format=3 uid="uid://binqsx11r7f0n"]
 
 [ext_resource type="Script" path="res://src/enemy/ram/ram_enemy.gd" id="1_02sjg"]
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_cbvfo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://dl64cycsvif7q" path="res://src/shaders/flash_sprite.tres" id="4_q5j6d"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_mdg6v"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_4oxr5"]
+[ext_resource type="Texture2D" uid="uid://khae5ar855h2" path="res://assets/images/particles/ram_charge.png" id="7_eekoi"]
 [ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="8_falhe"]
 [ext_resource type="Texture2D" uid="uid://bba358h7r7145" path="res://assets/images/particles/stunned_star.png" id="9_j5ys0"]
 
@@ -157,6 +158,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Pivot/ChargeSprite2D:frame")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_d84ho"]
@@ -467,6 +480,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/ChargeSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5]
+}
 
 [sub_resource type="Animation" id="Animation_v8p27"]
 resource_name = "ram_N"
@@ -567,6 +592,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/ChargeSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_m3sa0"]
@@ -669,6 +706,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/ChargeSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5]
+}
 
 [sub_resource type="Animation" id="Animation_uvvgy"]
 resource_name = "ram_W"
@@ -769,6 +818,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/ChargeSprite2D:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_1im38"]
@@ -996,7 +1057,7 @@ _data = {
 "walk_W": SubResource("Animation_dyquv")
 }
 
-[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "hitbox", "dust_particle", "charge_particle", "label")]
+[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "hitbox", "dust_particle", "charge_particle", "charge_sprite", "label")]
 motion_mode = 1
 script = ExtResource("1_02sjg")
 sprite_shader = ExtResource("4_q5j6d")
@@ -1005,6 +1066,7 @@ animator = NodePath("Animator")
 hitbox = NodePath("HitBox")
 dust_particle = NodePath("DustParticle")
 charge_particle = NodePath("Pivot/ChargeParticle")
+charge_sprite = NodePath("Pivot/ChargeSprite2D")
 label = NodePath("HealthLabel")
 
 [node name="HealthLabel" type="Label" parent="."]
@@ -1051,6 +1113,7 @@ position = Vector2(0, -10)
 rotation = 1.5708
 
 [node name="ChargeParticle" type="GPUParticles2D" parent="Pivot"]
+visible = false
 self_modulate = Color(2, 2, 2, 1)
 position = Vector2(0, -64)
 emitting = false
@@ -1060,6 +1123,14 @@ texture = ExtResource("8_falhe")
 lifetime = 0.5
 local_coords = true
 trail_enabled = true
+
+[node name="ChargeSprite2D" type="Sprite2D" parent="Pivot"]
+visible = false
+self_modulate = Color(5, 0.6, 0.2, 1)
+position = Vector2(0, -10)
+rotation = -1.5708
+texture = ExtResource("7_eekoi")
+hframes = 6
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0, -10)

@@ -13,7 +13,7 @@ var laser_target := Vector2.ZERO
 
 
 func _ready() -> void:
-	health.hp = 5
+	health.hp = 6
 	health.dead.connect(queue_free)
 
 
@@ -22,7 +22,7 @@ func laser_targeting() -> void:
 
 
 func shoot() -> void:
-	laser.target_position = laser.to_local(laser_target).normalized() * 1000.0
+	laser.target_position = laser.to_local(laser_target).normalized() * 2000.0
 	laser.is_casting = true
 	await get_tree().create_timer(0.3).timeout
 	laser.is_casting = false
