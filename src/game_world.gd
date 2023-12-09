@@ -18,8 +18,11 @@ func _ready():
 	spawn_player()
 	player.health.dead.connect(reset_loop)
 
+
 func spawn_player():
 	player.global_position = spawn_position.global_position
+	player.health.hp = 3
+
 
 func reset_loop():
 	iteration+=1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://brrg3g311unsc"]
+[gd_scene load_steps=19 format=3 uid="uid://brrg3g311unsc"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_8pqtf"]
 [ext_resource type="Texture2D" uid="uid://bgwbej76bxrc7" path="res://assets/images/Tilemap/tile.png" id="1_21evs"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dptcg7pk21lxl" path="res://src/arena/arena.tscn" id="3_g31yq"]
 [ext_resource type="Script" path="res://src/arena/enemy_spawner.gd" id="4_awdip"]
 [ext_resource type="PackedScene" uid="uid://binqsx11r7f0n" path="res://src/enemy/ram/ram_enemy.tscn" id="5_3vnhk"]
+[ext_resource type="PackedScene" uid="uid://ciko4rr4a3h2f" path="res://src/enemy/laser/laser_enemy.tscn" id="7_63ley"]
 [ext_resource type="PackedScene" uid="uid://dxkecsk5q42bs" path="res://src/enemy/virus/virus_enemy.tscn" id="7_uscpg"]
 [ext_resource type="PackedScene" uid="uid://bd63v37p60b8u" path="res://src/Breakable/breakable_object.tscn" id="9_6t4e6"]
 [ext_resource type="Script" path="res://src/tile_map/SpeakerContainer.gd" id="9_lxe4s"]
@@ -710,7 +711,7 @@ enemy_scn = ExtResource("5_3vnhk")
 [node name="EnemySpawner3" type="Marker2D" parent="ArenaContainer/Arena"]
 position = Vector2(262, -317)
 script = ExtResource("4_awdip")
-enemy_scn = ExtResource("5_3vnhk")
+enemy_scn = ExtResource("7_uscpg")
 
 [node name="EnemySpawner4" type="Marker2D" parent="ArenaContainer/Arena"]
 position = Vector2(290, 251)
@@ -720,7 +721,7 @@ enemy_scn = ExtResource("5_3vnhk")
 [node name="EnemySpawner5" type="Marker2D" parent="ArenaContainer/Arena"]
 position = Vector2(3, 44)
 script = ExtResource("4_awdip")
-enemy_scn = ExtResource("5_3vnhk")
+enemy_scn = ExtResource("7_63ley")
 
 [node name="Arena2" parent="ArenaContainer" node_paths=PackedStringArray("spawners", "gate_group_list") instance=ExtResource("3_g31yq")]
 position = Vector2(6337, 543)

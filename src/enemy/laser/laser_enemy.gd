@@ -3,12 +3,13 @@ extends Enemy
 
 @export var sprite_shader: ShaderMaterial
 
-@export var bullet_scn: PackedScene
-
 @export var state_chart: StateChart
 @export var animation_player: AnimationPlayer
+@export var laser: Laser
 
 @export var idle_speed := 50.0
+
+var laser_target := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -16,11 +17,15 @@ func _ready() -> void:
 	health.dead.connect(queue_free)
 
 
+func laser_targeting() -> void:
+	laser_target = target.global_position
+
+
 func shoot() -> void:
-	var bullet: Bullet = bullet_scn.instantiate()
-	get_parent().call_deferred("add_child", bullet)
-	bullet.set_deferred('global_position', global_position)
-	bullet.initialize(global_position.angle_to_point(target.global_position))
+	laser.target_position = laser.to_local(laser_target).normalized() * 2000.0
+	laser.is_casting = true
+	await get_tree().create_timer(0.3).timeout
+	laser.is_casting = false
 
 
 #region Idle State
