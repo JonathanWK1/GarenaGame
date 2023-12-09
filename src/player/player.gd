@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
 
+@export var health: Health
+@export var sprite_shader: ShaderMaterial
+
 @export var state_chart: StateChart
 @export var trail_manager: TrailManager
 @export var animator: Animator
-@export var health: Health
+@export var invulnerable_anim_player: AnimationPlayer
 @export var hurtbox: HurtBox
 @export var slash_sprites: Array[Sprite2D] = []
-
 @export var weapon_pivot: Marker2D
 @export var weapon_hitbox: HitBox
 
@@ -79,6 +81,7 @@ func _on_attack_state_unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed('attack'):
 		attack_queue = true
+		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
 		get_viewport().set_input_as_handled()
 
 
@@ -91,7 +94,6 @@ func _on_attack_state_exited() -> void:
 
 #region Dash State
 func _on_dash_state_entered() -> void:
-	hurtbox.disable()
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
 	trail_manager.summon_trail(5, 0.3)
@@ -99,6 +101,7 @@ func _on_dash_state_entered() -> void:
 
 func _on_dash_state_physics_processing(delta: float) -> void:
 	move_and_slide()
+	hurtbox.disable()
 
 
 func _on_dash_state_exited() -> void:
@@ -106,6 +109,25 @@ func _on_dash_state_exited() -> void:
 #endregion
 
 
+#region Invulnerable State
+func _on_invulnerable_state_entered() -> void:
+	invulnerable_anim_player.play('invulnerable')
+
+
+# BAD: conflicting with dash lol
+func _on_invulnerable_state_physics_processing(delta: float) -> void:
+	hurtbox.disable()
+
+
+func _on_invulnerable_state_exited() -> void:
+	hurtbox.enable()
+#endregion
+
+
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
-	GlobalEffects.freeze_frame(1.0)
+	state_chart.send_event('hurt')
+	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
+	GlobalEffects.freeze_frame(0.5)
 	health.hp -= 1
+	await get_tree().create_timer(0.05).timeout
+	sprite_shader.set_shader_parameter('flash_modifier', 0.0)

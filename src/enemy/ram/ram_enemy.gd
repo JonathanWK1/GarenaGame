@@ -1,6 +1,8 @@
 extends Enemy
 
 
+@export var sprite_shader: ShaderMaterial
+
 @export var state_chart: StateChart
 @export var animator: Animator
 @export var hitbox: HitBox
@@ -63,8 +65,11 @@ func _on_ram_state_exited() -> void:
 
 
 func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
+	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
 	GlobalEffects.freeze_frame(0.2)
 	health.hp -= 1
+	await get_tree().create_timer(0.1).timeout
+	sprite_shader.set_shader_parameter('flash_modifier', 0.0)
 
 
 func _on_hit_box_hurt_box_detected(hurt_box: Variant) -> void:
