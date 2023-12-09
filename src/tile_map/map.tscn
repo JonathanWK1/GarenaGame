@@ -685,7 +685,7 @@ position = Vector2(0, 2)
 script = ExtResource("1_wrior")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
-position = Vector2(-329, 818)
+position = Vector2(963, 591)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2opqv")
@@ -1070,15 +1070,19 @@ script = ExtResource("12_s6q6h")
 
 [node name="Gate3" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, -35)
+is_active = true
 
 [node name="Gate4" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, 29)
+is_active = true
 
 [node name="Gate" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(90, -35)
+is_active = true
 
 [node name="Gate2" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(90, 29)
+is_active = true
 
 [node name="CCTVContainer" type="Node2D" parent="."]
 position = Vector2(9932, 46)

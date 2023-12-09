@@ -1,0 +1,323 @@
+[gd_scene load_steps=5 format=3 uid="uid://csopnt3mulnx0"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_x5g47"]
+[ext_resource type="Texture2D" uid="uid://d00a6otimyci2" path="res://assets/images/button/numpad_button.png" id="2_uh0fc"]
+[ext_resource type="Texture2D" uid="uid://clrpk7vgcbpv" path="res://assets/images/button/numpad_button_hover.png" id="3_rguns"]
+[ext_resource type="Script" path="res://src/speaker/switch_button.gd" id="4_5vekk"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x5g47")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.243137, 0.243137, 0.592157)
+
+[node name="ColorRect" type="ColorRect" parent="Panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 707.0
+offset_top = 32.0
+offset_right = -721.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.239216, 0.521569, 0.376471, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Panel/ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.986
+anchor_bottom = 0.366
+offset_left = 25.0
+offset_top = 22.0
+offset_right = -21.112
+offset_bottom = -3.05176e-05
+color = Color(0.207843, 0.32549, 0.0627451, 1)
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.315
+offset_left = 36.0
+offset_top = 55.0
+offset_right = -45.0
+offset_bottom = -3.05176e-05
+theme_override_font_sizes/font_size = 90
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="GridContainer" parent="Panel/ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 411.0
+offset_right = -50.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="TextureButton" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton3" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton4" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton5" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton6" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton7" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton8" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton9" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton10" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton11" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton12" type="TextureButton" parent="Panel/ColorRect/ColorRect/ButtonContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_uh0fc")
+texture_hover = ExtResource("3_rguns")
+script = ExtResource("4_5vekk")
+id = 1
+
+[node name="Label" type="Label" parent="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton2" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton2" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton3" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton3" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton4" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton4" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton5" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton5" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton6" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton6" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton7" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton7" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton8" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton8" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton9" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton9" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton10" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton10" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton11" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton11" method="_on_button_down"]
+[connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton12" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton12" method="_on_button_down"]
