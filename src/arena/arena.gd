@@ -28,18 +28,21 @@ func spawn_enemies(area: Area2D) -> void:
 			func():
 				enemy_left -= 1
 		)
-		
+
 
 func reset_trigger():
 	triggered = false
 	set_gate(false)
+	print("reset trigger")
 
 
 func reset_enemies():
+	enemy_left = 0
 	for i in spawned_enemies:
 		if (is_instance_valid(i)):
 			i.queue_free()
 	spawned_enemies.clear()
+
 
 func _on_trigger_area_area_entered(area: Area2D) -> void:
 	if not triggered:
@@ -47,6 +50,7 @@ func _on_trigger_area_area_entered(area: Area2D) -> void:
 		triggered = true
 		set_gate(true)
 		spawn_enemies(area)
+
 
 func set_gate(value):
 	for gate_group in gate_group_list:
