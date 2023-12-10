@@ -28,6 +28,7 @@ to_show = NodePath("../CanvasLayer/Control")
 texture = ExtResource("2_oeqrn")
 
 [node name="GameWorld" parent="." instance=ExtResource("1_af7lv")]
+position = Vector2(-53, -7)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

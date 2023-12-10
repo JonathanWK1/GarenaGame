@@ -835,7 +835,8 @@ script = ExtResource("9_lxe4s")
 
 [node name="NPC1" parent="SpeakerContainer" instance=ExtResource("2_46fep")]
 position = Vector2(1600, 576)
-text = "Training iteration 1,your objective is to finish the training module within the time limit, good luck."
+text = "Training iteration 1
+Good luck!"
 
 [node name="TriggerArea" parent="SpeakerContainer/NPC1" index="0"]
 metadata/_edit_lock_ = true

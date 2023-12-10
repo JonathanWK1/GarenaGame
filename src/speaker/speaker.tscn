@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnp6pw8ux11y"]
+[gd_scene load_steps=7 format=3 uid="uid://dnp6pw8ux11y"]
 
 [ext_resource type="Script" path="res://src/speaker/speaker.gd" id="1_8sa5y"]
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="2_04kt1"]
 [ext_resource type="FontFile" uid="uid://dtbup7k4w1kiw" path="res://assets/font/PrStart.ttf" id="2_72601"]
+[ext_resource type="Texture2D" uid="uid://8sqiq43vkj5j" path="res://assets/images/GUI/nine_patch.png" id="2_ku2vb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujtca"]
 radius = 80.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dmabu"]
+texture = ExtResource("2_ku2vb")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
 
 [node name="Speaker" type="Node2D" node_paths=PackedStringArray("to_show")]
 script = ExtResource("1_8sa5y")
@@ -34,7 +42,16 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
-color = Color(0.364706, 0.364706, 0.364706, 1)
+color = Color(0.364706, 0.364706, 0.364706, 0)
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dmabu")
 
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 1
