@@ -135,7 +135,8 @@ func _on_dash_state_entered() -> void:
 	can_dash = false
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
-	trail_manager.summon_trail(6, 0.3)
+	await get_tree().create_timer(0.05).timeout
+	trail_manager.summon_trail(5, 0.3)
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
