@@ -11,6 +11,9 @@ class_name RamEnemy
 @export var dust_particle: GPUParticles2D
 @export var charge_particle: GPUParticles2D
 @export var charge_sprite: Sprite2D
+@export var charge_audio: AudioStreamPlayer
+@export var ram_audio: AudioStreamPlayer
+@export var collided_audio: AudioStreamPlayer
 
 @export var idle_speed := 50.0
 @export var ram_speed := 700.0
@@ -42,12 +45,14 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 
 #region Charging State
 func _on_charging_state_entered() -> void:
+	charge_audio.play()
 	animator.play_8_way_anim('charging', target.global_position - global_position)
 #endregion
 
 
 #region Ram State
 func _on_ram_state_entered() -> void:
+	ram_audio.play()
 	var v2 := target.global_position - global_position
 	var angle := v2.angle()
 	animator.play_8_way_anim('ram', v2)
@@ -64,11 +69,13 @@ func _on_ram_state_physics_processing(delta: float) -> void:
 		velocity = velocity.normalized() * lerpf(0.1, ram_speed, ram_time)
 	
 	if move_and_slide():
+		collided_audio.play(0.1)
 		hit_particle.emitting = true
 		state_chart.send_event('ram_collided')
 
 
 func _on_ram_state_exited() -> void:
+	ram_audio.stop()
 	hitbox.disable()
 	dust_particle.emitting = false
 	charge_sprite.hide()

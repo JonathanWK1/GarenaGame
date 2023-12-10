@@ -6,6 +6,8 @@ extends Enemy
 @export var state_chart: StateChart
 @export var animation_player: AnimationPlayer
 @export var laser: Laser
+@export var laser_audio: AudioStreamPlayer
+@export var charge_audio: AudioStreamPlayer
 
 @export var idle_speed := 50.0
 
@@ -23,6 +25,7 @@ func laser_targeting() -> void:
 
 func shoot() -> void:
 	laser.target_position = laser.to_local(laser_target).normalized() * 2000.0
+	laser_audio.play()
 	laser.is_casting = true
 	await get_tree().create_timer(0.3).timeout
 	laser.is_casting = false
@@ -42,6 +45,7 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 
 
 func _on_shooting_state_entered() -> void:
+	charge_audio.play()
 	animation_player.play('shooting')
 
 

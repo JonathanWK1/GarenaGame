@@ -1043,6 +1043,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpecialArea" index="0"]
 shape = SubResource("CircleShape2D_fs2ta")
+disabled = true
 
 [node name="AnimationPlayer" parent="." index="12"]
 libraries = {

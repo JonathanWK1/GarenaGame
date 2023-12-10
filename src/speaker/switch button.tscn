@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://csopnt3mulnx0"]
+[gd_scene load_steps=6 format=3 uid="uid://csopnt3mulnx0"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_x5g47"]
 [ext_resource type="Texture2D" uid="uid://d00a6otimyci2" path="res://assets/images/button/numpad_button.png" id="2_uh0fc"]
 [ext_resource type="Texture2D" uid="uid://clrpk7vgcbpv" path="res://assets/images/button/numpad_button_hover.png" id="3_rguns"]
 [ext_resource type="Script" path="res://src/speaker/switch_button.gd" id="4_5vekk"]
+[ext_resource type="AudioStream" uid="uid://c3aqx04yw7bd5" path="res://assets/audios/432313__1tmsounds__dialing-numbers.wav" id="5_ytdc0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -343,6 +344,9 @@ theme_override_font_sizes/font_size = 70
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ytdc0")
 
 [connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton" method="_on_button_down"]
 [connection signal="button_down" from="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton2" to="Panel/ColorRect/ColorRect/ButtonContainer/TextureButton2" method="_on_button_down"]

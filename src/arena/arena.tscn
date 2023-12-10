@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dptcg7pk21lxl"]
+[gd_scene load_steps=5 format=3 uid="uid://dptcg7pk21lxl"]
 
 [ext_resource type="Script" path="res://src/arena/arena.gd" id="1_miww3"]
+[ext_resource type="AudioStream" uid="uid://birq8vkkcy8q6" path="res://assets/audios/662808__nuncaconoci__gate.wav" id="2_26b6l"]
+[ext_resource type="AudioStream" uid="uid://hwat0c8cjp15" path="res://assets/audios/339632__nichols8917__door-closing.wav" id="3_frbtt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ebd7"]
 size = Vector2(1780, 950)
 
-[node name="Arena" type="Node2D"]
+[node name="Arena" type="Node2D" node_paths=PackedStringArray("close_audio", "open_audio")]
 script = ExtResource("1_miww3")
+close_audio = NodePath("CloseAudioStreamPlayer")
+open_audio = NodePath("OpenAudioStreamPlayer")
 
 [node name="TriggerArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -15,5 +19,13 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
 shape = SubResource("RectangleShape2D_8ebd7")
+
+[node name="CloseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_26b6l")
+volume_db = 6.0
+
+[node name="OpenAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_frbtt")
+volume_db = 6.0
 
 [connection signal="area_entered" from="TriggerArea" to="." method="_on_trigger_area_area_entered"]

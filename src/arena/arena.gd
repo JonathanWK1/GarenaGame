@@ -4,6 +4,8 @@ class_name Arena
 
 @export var spawners: Array[EnemySpawner] = []
 @export var gate_group_list: Array[GateGroup] = []
+@export var close_audio: AudioStreamPlayer
+@export var open_audio: AudioStreamPlayer
 
 @export var id : = 0
 var triggered := false
@@ -54,5 +56,10 @@ func _on_trigger_area_area_entered(area: Area2D) -> void:
 
 
 func set_gate(value):
+	if value:
+		close_audio.play()
+	else:
+		open_audio.play()
+	
 	for gate_group in gate_group_list:
 		gate_group.set_gate_active(value)

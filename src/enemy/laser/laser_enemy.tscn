@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ciko4rr4a3h2f"]
+[gd_scene load_steps=22 format=3 uid="uid://ciko4rr4a3h2f"]
 
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="1_qh8og"]
 [ext_resource type="Script" path="res://src/enemy/laser/laser_enemy.gd" id="1_r6yox"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_xr8eo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_qs0kj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_as0lc"]
+[ext_resource type="AudioStream" uid="uid://dtuflrawfgavj" path="res://assets/audios/413057__matrixxx__retro-laser-shot-01.wav" id="13_jtf4k"]
+[ext_resource type="AudioStream" uid="uid://c83pmtdtwnutl" path="res://assets/audios/701702__stavsounds__laser-charge.wav" id="14_w50rq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2hro1"]
 radius = 16.0
@@ -115,12 +117,14 @@ scale_min = 0.5
 color = Color(1, 1, 0, 1)
 hue_variation_max = 0.1
 
-[node name="LaserEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player", "laser")]
+[node name="LaserEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player", "laser", "laser_audio", "charge_audio")]
 script = ExtResource("1_r6yox")
 sprite_shader = ExtResource("2_1ojur")
 state_chart = NodePath("StateChart")
 animation_player = NodePath("AnimationPlayer")
 laser = NodePath("Laser")
+laser_audio = NodePath("LaserAudioStreamPlayer")
+charge_audio = NodePath("ChargingAudioStreamPlayer")
 
 [node name="ShadowSprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -10)
@@ -206,6 +210,12 @@ script = ExtResource("7_qs0kj")
 script = ExtResource("8_as0lc")
 to = NodePath("../../Idle")
 delay_seconds = 2.5
+
+[node name="LaserAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jtf4k")
+
+[node name="ChargingAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_w50rq")
 
 [connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]

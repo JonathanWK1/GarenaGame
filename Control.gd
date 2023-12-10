@@ -35,7 +35,7 @@ func submit():
 
 
 func add_to_label(id : int):
-	print(id)
+	$AudioStreamPlayer.play()
 	if (id == 11):
 		if submit():
 			GlobalSignal.correct_password.emit()
