@@ -2,6 +2,7 @@ extends Control
 
 @onready var label := $Panel/ColorRect/ColorRect/Label
 @onready var button_container := $Panel/ColorRect/ColorRect/ButtonContainer
+@export var speaker : Speaker
 
 var list = []
 var list_answer = [5,6,3,7]
@@ -38,6 +39,7 @@ func add_to_label(id : int):
 	$AudioStreamPlayer.play()
 	if (id == 11):
 		if submit():
+			speaker.set_disabled(true)
 			GlobalSignal.correct_password.emit()
 		else:
 			hide()

@@ -95,6 +95,7 @@ restart={
 2d_physics/layer_7="parry"
 2d_physics/layer_8="special_enemy_trigger"
 2d_physics/layer_9="interactable"
+2d_physics/layer_10="reset_loop"
 
 [rendering]
 

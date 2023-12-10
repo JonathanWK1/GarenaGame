@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=63 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
@@ -1007,6 +1007,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_4p75g"]
 radius = 29.2746
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjwh2"]
+size = Vector2(61, 57)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "trail_manager", "animator", "invulnerable_anim_player", "hurtbox", "parry_area", "slash_sprites", "weapon_pivot", "weapon_hitbox")]
 collision_layer = 32
 collision_mask = 33
@@ -1299,6 +1302,15 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerSwitchArea"]
 position = Vector2(-1, -21)
 shape = SubResource("CircleShape2D_4p75g")
+
+[node name="TriggerLoopArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerLoopArea"]
+position = Vector2(0.5, -18.5)
+shape = SubResource("RectangleShape2D_pjwh2")
 
 [connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
 [connection signal="area_entered" from="WeaponPivot/HitBox" to="WeaponPivot/HitBox" method="_on_area_entered"]

@@ -8,6 +8,7 @@ class_name Speaker
 @onready var label = $ColorRect/Label
 @onready var sprite = $Sprite
 
+@onready var area := $TriggerArea/CollisionShape2D
 
 func _ready():
 	label.text = text
@@ -16,6 +17,9 @@ func _ready():
 func set_text(value : String):
 	label.text = value;
 
+
+func set_disabled(value):
+	area.disabled = value
 
 func _on_trigger_area_area_entered(area: Area2D) -> void:
 	to_show.show()

@@ -10,6 +10,17 @@ extends Node2D
 @export var UI_Dead : Control
 @export var time_limit : int = 180
 
+var lost_text = "You Died 
+
+Press R to Restart"
+
+
+var win_text = "Congratulation
+
+You Escaped 
+
+Press R to Restart"
+
 var iteration = 1:
 	set(value):
 		iteration = value
@@ -34,6 +45,7 @@ func spawn_player():
 
 func reset_loop():
 	if (switch_triggered) :
+		UI_Dead.set_text(lost_text)
 		UI_Dead.show()
 		return
 	iteration+=1
@@ -48,3 +60,12 @@ func reset_timer():
 
 func _on_timer_timeout():
 	reset_loop()
+
+
+func _on_reset_area_area_entered(area):
+	if (!switch_triggered):
+		reset_loop()
+	else:
+		UI_Dead.set_text(win_text)
+		UI_Dead.show()
+		
