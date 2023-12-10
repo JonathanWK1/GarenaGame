@@ -25,7 +25,7 @@ var ram_time := 0.0
 
 func _ready() -> void:
 	super._ready()
-	health.hp = 6
+	health.hp = 3
 	health.dead.connect(queue_free)
 
 

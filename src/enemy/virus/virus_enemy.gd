@@ -14,7 +14,7 @@ extends Enemy
 
 
 func _ready() -> void:
-	health.hp = 4
+	health.hp = 2
 	health.dead.connect(queue_free)
 
 

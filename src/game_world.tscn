@@ -15,6 +15,7 @@ position = Vector2(923, 714)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(904, 875)
+process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("7_s6o3i")
