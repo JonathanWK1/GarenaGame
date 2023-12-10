@@ -1079,6 +1079,7 @@ collided_audio = NodePath("CollidedAudioStreamPlayer")
 label = NodePath("HealthLabel")
 
 [node name="HealthLabel" type="Label" parent="."]
+visible = false
 offset_left = -101.0
 offset_top = -134.0
 offset_right = 99.0
