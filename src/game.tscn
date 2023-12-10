@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpu4gn5qmsg8g"]
+[gd_scene load_steps=11 format=3 uid="uid://dpu4gn5qmsg8g"]
 
 [ext_resource type="PackedScene" uid="uid://bq5ts738kbc3x" path="res://src/game_world.tscn" id="1_af7lv"]
 [ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="1_n272t"]
@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://btnhyflueyytw" path="res://assets/images/Tilemap/icon_info.png" id="2_oeqrn"]
 [ext_resource type="AudioStream" uid="uid://briyha1oiy5nv" path="res://assets/audios/645163__josefpres__8-bit-game-loop-002-simple-mix-3-long-120-bpm.ogg" id="6_7xi5j"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="6_hc0tl"]
+[ext_resource type="Script" path="res://src/SFXAudioStreamPlayer.gd" id="8_qt8pr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etqok"]
 shader = ExtResource("6_hc0tl")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/multiplier = 0.2
-shader_parameter/softness = 1.1
+shader_parameter/softness = 1.05
 
 [sub_resource type="Environment" id="Environment_ijcg4"]
 background_mode = 3
@@ -51,12 +52,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ijcg4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7xi5j")
+volume_db = -3.0
 autoplay = true
+
+[node name="SFXAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("8_qt8pr")
 
 [editable path="PasswordTrigger"]
