@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d0v1pk0eoigpn" path="res://assets/images/particles/hit_particle.tscn" id="3_ui2bf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_al5wt"]
-size = Vector2(192, 100)
+size = Vector2(192, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6rmw"]
 size = Vector2(192, 16)
