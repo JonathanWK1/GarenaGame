@@ -195,6 +195,10 @@ func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
 	state_chart.send_event('hurt')
 	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
 	GlobalEffects.freeze_frame(0.5)
+	if health.hp > 1:
+		$HurtAudioStreamPlayer.play()
+	else:
+		$DeadAudioStreamPlayer.play()
 	health.hp -= 1
 	await get_tree().create_timer(0.05).timeout
 	sprite_shader.set_shader_parameter('flash_modifier', 0.0)

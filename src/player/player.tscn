@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=62 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
@@ -24,6 +24,8 @@
 [ext_resource type="Script" path="res://src/player/parry_area.gd" id="13_hvm12"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="17_pxx20"]
 [ext_resource type="AudioStream" uid="uid://rkqlsr8vn6d7" path="res://assets/audios/147289__smokebomb99__axe-slash-2.wav" id="19_03bp2"]
+[ext_resource type="AudioStream" uid="uid://c4wocn40hl0du" path="res://assets/audios/341244__jeremysykes__hurt01.wav" id="20_nkqm2"]
+[ext_resource type="AudioStream" uid="uid://cmsrvkk3spk6f" path="res://assets/audios/382310__myfox14__game-over-arcade.wav" id="21_vefxw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4pkr"]
 
@@ -1174,6 +1176,12 @@ libraries = {
 
 [node name="SlashAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_03bp2")
+
+[node name="HurtAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_nkqm2")
+
+[node name="DeadAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_vefxw")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_regu6")
