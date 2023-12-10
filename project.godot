@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Garena Game"
+config/name="Whisker's Escape"
 run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

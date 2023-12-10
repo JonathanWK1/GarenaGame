@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpu4gn5qmsg8g"]
+[gd_scene load_steps=12 format=3 uid="uid://dpu4gn5qmsg8g"]
 
 [ext_resource type="PackedScene" uid="uid://bq5ts738kbc3x" path="res://src/game_world.tscn" id="1_af7lv"]
 [ext_resource type="PackedScene" uid="uid://dnp6pw8ux11y" path="res://src/speaker/speaker.tscn" id="1_n272t"]
 [ext_resource type="PackedScene" uid="uid://csopnt3mulnx0" path="res://src/speaker/switch button.tscn" id="2_j8mtk"]
 [ext_resource type="PackedScene" uid="uid://cdtsq602llvxy" path="res://src/GUI/hud.tscn" id="2_ndkwa"]
 [ext_resource type="Texture2D" uid="uid://btnhyflueyytw" path="res://assets/images/Tilemap/icon_info.png" id="2_oeqrn"]
-[ext_resource type="PackedScene" uid="uid://djfd7t40kpwv4" path="res://src/GUI/pop_up_die.tscn" id="4_g1x51"]
+[ext_resource type="PackedScene" path="res://src/GUI/pop_up_die.tscn" id="4_g1x51"]
 [ext_resource type="AudioStream" uid="uid://briyha1oiy5nv" path="res://assets/audios/645163__josefpres__8-bit-game-loop-002-simple-mix-3-long-120-bpm.ogg" id="6_7xi5j"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="6_hc0tl"]
 [ext_resource type="Script" path="res://src/SFXAudioStreamPlayer.gd" id="8_qt8pr"]
