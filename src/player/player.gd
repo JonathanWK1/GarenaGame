@@ -59,25 +59,29 @@ func _on_normal_state_entered() -> void:
 		attack_combo = 0
 
 
+func _on_normal_state_unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed('dash') and can_dash:
+		direction = get_move_input()
+		state_chart.send_event('dash')
+		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed('attack'):
+		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
+		state_chart.send_event('attack')
+		get_viewport().set_input_as_handled()
+
+
 func _on_normal_state_physics_processing(delta: float) -> void:
 	var input_direction := get_move_input()
 	
 	if input_direction.length() > 0:
 		direction = input_direction
-		if Input.is_action_just_pressed('dash') and can_dash:
-			state_chart.send_event('dash')
-			return
-		
 		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
 		animator.play_8_way_anim('walk', direction)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 		animator.play_8_way_anim('idle')
 	move_and_slide()
-	
-	if Input.is_action_just_pressed('attack'):
-		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())
-		state_chart.send_event('attack')
 	
 	if Input.is_action_just_pressed('parry'):
 		weapon_rotation = global_position.angle_to_point(get_global_mouse_position())

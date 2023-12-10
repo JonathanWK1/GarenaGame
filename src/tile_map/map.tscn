@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://brrg3g311unsc"]
+[gd_scene load_steps=33 format=3 uid="uid://brrg3g311unsc"]
 
 [ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="1_8pqtf"]
 [ext_resource type="Texture2D" uid="uid://bgwbej76bxrc7" path="res://assets/images/Tilemap/tile.png" id="1_21evs"]
@@ -966,10 +966,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("14_or6hr")
 
 [node name="BreakableWall" parent="." instance=ExtResource("9_6t4e6")]
-position = Vector2(3887, 976)
+position = Vector2(3872, 1056)
 
 [node name="BrokenWall" parent="BreakableWall" instance=ExtResource("2_46fep")]
-position = Vector2(-37, -35)
+position = Vector2(0, -96)
 text = "This wall looks like it could collapse at any time."
 metadata/_edit_group_ = true
 
@@ -1042,15 +1042,18 @@ rotation = 1.5708
 script = ExtResource("12_s6q6h")
 
 [node name="Gate5" parent="GateContainer/GateGroup6" instance=ExtResource("11_o4p8k")]
+z_index = -1
 position = Vector2(-102, 93)
 
 [node name="Gate6" parent="GateContainer/GateGroup6" instance=ExtResource("11_o4p8k")]
 position = Vector2(793, 93)
 
 [node name="Gate3" parent="GateContainer/GateGroup6" instance=ExtResource("11_o4p8k")]
+z_index = -1
 position = Vector2(-102, -35)
 
 [node name="Gate4" parent="GateContainer/GateGroup6" instance=ExtResource("11_o4p8k")]
+z_index = -1
 position = Vector2(-102, 29)
 
 [node name="Gate" parent="GateContainer/GateGroup6" instance=ExtResource("11_o4p8k")]
@@ -1138,6 +1141,7 @@ position = Vector2(90, 29)
 [node name="GateGroup1" type="Node2D" parent="GateContainer"]
 position = Vector2(-57, 514)
 script = ExtResource("12_s6q6h")
+id = 1
 
 [node name="Gate3" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, -35)
@@ -1176,7 +1180,7 @@ max_rotation = 220.0
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" parent="." instance=ExtResource("19_5os4t")]
-position = Vector2(-481, 474)
+position = Vector2(-448, 510)
 
 [node name="InfoCamDecorations" type="Node2D" parent="."]
 
@@ -1230,8 +1234,20 @@ texture = ExtResource("20_r0d3m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartDecorations/Table/StaticBody2D"]
 shape = SubResource("RectangleShape2D_cf4bj")
 
-[node name="Computer" type="Sprite2D" parent="StartDecorations"]
-position = Vector2(1600, 448)
+[node name="Computer" type="Sprite2D" parent="StartDecorations/Table"]
+texture = ExtResource("22_8elu7")
+
+[node name="Table2" type="Sprite2D" parent="StartDecorations"]
+position = Vector2(160, 382)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StartDecorations/Table2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartDecorations/Table2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_cf4bj")
+
+[node name="Computer" type="Sprite2D" parent="StartDecorations/Table2"]
 texture = ExtResource("22_8elu7")
 
 [node name="InfoRamDecorations" type="Node2D" parent="."]

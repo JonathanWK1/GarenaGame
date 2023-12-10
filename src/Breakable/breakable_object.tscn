@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://bd63v37p60b8u"]
 
 [ext_resource type="Script" path="res://src/Breakable/breakable_object.gd" id="1_4swqg"]
-[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="2_288nl"]
+[ext_resource type="Texture2D" uid="uid://m3iw202d5hhf" path="res://assets/images/Tilemap/breakable_gate.png" id="2_xfdov"]
 [ext_resource type="PackedScene" uid="uid://d0v1pk0eoigpn" path="res://assets/images/particles/hit_particle.tscn" id="3_ui2bf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_al5wt"]
-size = Vector2(128, 128)
+size = Vector2(192, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6rmw"]
-size = Vector2(128, 128)
+size = Vector2(192, 16)
 
 [node name="BreakableObject" type="Node2D"]
 script = ExtResource("1_4swqg")
@@ -26,7 +26,15 @@ shape = SubResource("RectangleShape2D_al5wt")
 shape = SubResource("RectangleShape2D_v6rmw")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_288nl")
+texture = ExtResource("2_xfdov")
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("2_xfdov")
+
+[node name="Sprite3" type="Sprite2D" parent="."]
+position = Vector2(-64, 0)
+texture = ExtResource("2_xfdov")
 
 [node name="HitParticle" parent="." instance=ExtResource("3_ui2bf")]
 emitting = false

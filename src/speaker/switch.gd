@@ -5,16 +5,13 @@ extends StaticBody2D
 
 var switched = false
 var player_entered = false
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
 
 func _input(event):
 	if (event.is_action_pressed("switch") && player_entered):
 		switched = true
 		color_rect.hide()
 		GlobalSignal.switch_triggered.emit()
-
 
 
 func _on_area_2d_area_entered(area):
