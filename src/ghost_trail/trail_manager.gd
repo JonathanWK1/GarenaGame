@@ -20,8 +20,10 @@ func summon_trail(amount := 2, duration := 0.5) -> void:
 		new_dash.frame = sprite.frame
 		new_dash.flip_h = sprite.flip_h
 		new_dash.flip_v = sprite.flip_v
-		new_dash.scale.x = sprite.scale.x
-		new_dash.scale.y = sprite.scale.y
+		new_dash.scale = sprite.scale
 		new_dash.global_rotation = sprite.global_rotation
+		
+		print(new_dash.global_position)
+		print(sprite.global_position)
 		
 		await get_tree().create_timer(duration / amount).timeout
