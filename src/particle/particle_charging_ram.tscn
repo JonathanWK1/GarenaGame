@@ -15,8 +15,7 @@ spread = 8.0
 initial_velocity_min = 30.0
 initial_velocity_max = 80.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.4
+scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_nkvyk")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
