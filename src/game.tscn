@@ -45,8 +45,9 @@ UI_Dead = NodePath("../CanvasLayer/PopUpDie")
 [node name="PopUpDie" parent="CanvasLayer" instance=ExtResource("4_g1x51")]
 visible = false
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("2_j8mtk")]
+[node name="Control" parent="CanvasLayer" node_paths=PackedStringArray("speaker") instance=ExtResource("2_j8mtk")]
 visible = false
+speaker = NodePath("../../PasswordTrigger")
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("2_ndkwa")]
 
