@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://src/components/hitbox.gd" id="10_8ti4j"]
 [ext_resource type="Texture2D" uid="uid://byj4ju2o5pvqj" path="res://assets/images/player/player_parry.png" id="10_fhc6a"]
 [ext_resource type="Texture2D" uid="uid://bx7ogfhdx6wqq" path="res://assets/images/player/player_slash_1.png" id="11_glh26"]
+[ext_resource type="Texture2D" uid="uid://b2upt4gm01f5g" path="res://assets/images/particles/circle_shadow.png" id="11_mfji0"]
 [ext_resource type="Script" path="res://src/components/animator.gd" id="12_flyqg"]
 [ext_resource type="Texture2D" uid="uid://dccy5x4pmpg1u" path="res://assets/images/player/player_slash_2.png" id="12_w5rre"]
 [ext_resource type="Script" path="res://src/player/parry_area.gd" id="13_hvm12"]
@@ -1020,6 +1021,10 @@ slash_sprites = [NodePath("WeaponPivot/FirstSlashSprite2D"), NodePath("WeaponPiv
 weapon_pivot = NodePath("WeaponPivot")
 weapon_hitbox = NodePath("WeaponPivot/HitBox")
 
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("11_mfji0")
+
 [node name="SpriteManager" type="Node2D" parent="."]
 position = Vector2(0, -29)
 script = ExtResource("3_2gqdx")
@@ -1072,6 +1077,7 @@ hframes = 10
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_w4pkr")
 metadata/_edit_lock_ = true

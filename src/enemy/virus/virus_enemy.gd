@@ -12,7 +12,7 @@ extends Enemy
 
 
 func _ready() -> void:
-	health.hp = 6
+	health.hp = 4
 	health.dead.connect(queue_free)
 
 
