@@ -1141,6 +1141,7 @@ position = Vector2(90, 29)
 [node name="GateGroup1" type="Node2D" parent="GateContainer"]
 position = Vector2(-57, 514)
 script = ExtResource("12_s6q6h")
+id = 1
 
 [node name="Gate3" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, -35)
@@ -1233,8 +1234,20 @@ texture = ExtResource("20_r0d3m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartDecorations/Table/StaticBody2D"]
 shape = SubResource("RectangleShape2D_cf4bj")
 
-[node name="Computer" type="Sprite2D" parent="StartDecorations"]
-position = Vector2(1600, 448)
+[node name="Computer" type="Sprite2D" parent="StartDecorations/Table"]
+texture = ExtResource("22_8elu7")
+
+[node name="Table2" type="Sprite2D" parent="StartDecorations"]
+position = Vector2(160, 382)
+texture = ExtResource("20_r0d3m")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StartDecorations/Table2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartDecorations/Table2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_cf4bj")
+
+[node name="Computer" type="Sprite2D" parent="StartDecorations/Table2"]
 texture = ExtResource("22_8elu7")
 
 [node name="InfoRamDecorations" type="Node2D" parent="."]

@@ -19,6 +19,6 @@ func open_password_gate():
 	if (id == 1):
 		var list_gate = get_children()
 		for i in list_gate:
-			i.set_active(true)
+			i.set_active(false)
 		
 

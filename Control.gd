@@ -16,25 +16,24 @@ func _ready():
 			temp = false
 		else:
 			count += 1
-		
-		
 		if (b.id <= 9):
 			b.label.text = str(b.id)
 		elif (b.id == 10):
-			b.label.text = "B"
+			b.label.text = "<"
 		elif (b.id == 11):
 			b.label.text = "E"
 			
-			
 		b.is_pressed.connect(add_to_label)
-		
+
+
 func submit():
 	if (len(list) != 4) : return false
 	for i in range(4):
 		if (list[i] != list_answer[i]):
 			return false
 	return true
-	
+
+
 func add_to_label(id : int):
 	print(id)
 	if (id == 11):
