@@ -16,6 +16,10 @@ func _ready():
 	GlobalSignal._arena_finished.connect(freeze_timer)
 	time_count = time_limit
 
+func _on_trigger_area_area_entered(area: Area2D) -> void:
+	if (!freeze or closed):
+		to_show.show()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (!freeze):
@@ -25,7 +29,9 @@ func _process(delta):
 
 func freeze_timer(arena : Node2D):
 	if (freeze): return
-	if (arena.id == 1):
+	print(arena.id)
+	if (arena.id == 3):
+		print("freeze")
 		freeze = true
 
 func set_timer_label(value):

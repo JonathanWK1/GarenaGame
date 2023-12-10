@@ -13,9 +13,7 @@ var enemy_left := 0 :
 		enemy_left = value
 		if enemy_left <= 0:
 			set_gate(false)
-			GlobalSignal.arena_finished.emit()
-			GlobalSignal._arena_finished.emit(self)
-
+			
 
 func spawn_enemies(area: Area2D) -> void:
 	for spawner in spawners:
@@ -27,13 +25,16 @@ func spawn_enemies(area: Area2D) -> void:
 		enemy.health.dead.connect(
 			func():
 				enemy_left -= 1
+				if (enemy_left <= 0):
+					GlobalSignal.arena_finished.emit()
+					GlobalSignal._arena_finished.emit(self)
+					set_gate(false)
 		)
 
 
 func reset_trigger():
 	triggered = false
 	set_gate(false)
-	print("reset trigger")
 
 
 func reset_enemies():

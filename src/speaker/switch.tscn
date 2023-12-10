@@ -36,6 +36,7 @@ shape = SubResource("CapsuleShape2D_us4go")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -214.0
 offset_top = -282.0
 offset_right = 216.0

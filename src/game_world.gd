@@ -7,7 +7,7 @@ extends Node2D
 @onready var camera: GameCamera = $Camera2D
 @onready var timer : Timer = $Timer
 
-
+@export var UI_Dead : Control
 @export var time_limit : int = 180
 
 var iteration = 1:
@@ -15,9 +15,15 @@ var iteration = 1:
 		iteration = value
 		GlobalSignal.iteration_changed.emit(iteration)
 
+var switch_triggered = false
+
 
 func _ready():
 	spawn_player()
+	GlobalSignal.switch_triggered.connect(
+		func () :
+			switch_triggered = true
+	)
 	player.health.dead.connect(reset_loop)
 
 
@@ -27,6 +33,9 @@ func spawn_player():
 
 
 func reset_loop():
+	if (switch_triggered) :
+		UI_Dead.show()
+		return
 	iteration+=1
 	reset_timer()
 	map.reset_map()
