@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccl0sxy7wkbj6"]
+[gd_scene load_steps=59 format=3 uid="uid://ccl0sxy7wkbj6"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_ur3fd"]
 [ext_resource type="Resource" uid="uid://b13pwo1x4nre6" path="res://src/resource/player_health.tres" id="2_7j3iq"]
@@ -1293,6 +1293,7 @@ shape = SubResource("CircleShape2D_4p75g")
 [connection signal="area_entered" from="WeaponPivot/HitBox" to="WeaponPivot/HitBox" method="_on_area_entered"]
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Normal" to="." method="_on_normal_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Normal" to="." method="_on_normal_state_physics_processing"]
+[connection signal="state_unhandled_input" from="StateChart/ParallelState/BehaviourStates/Normal" to="." method="_on_normal_state_unhandled_input"]
 [connection signal="state_entered" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_entered"]
 [connection signal="state_exited" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/ParallelState/BehaviourStates/Attack" to="." method="_on_attack_state_physics_processing"]
