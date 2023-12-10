@@ -36,8 +36,9 @@ to_show = NodePath("../CanvasLayer/Control")
 [node name="Sprite" parent="PasswordTrigger" index="2"]
 texture = ExtResource("2_oeqrn")
 
-[node name="GameWorld" parent="." instance=ExtResource("1_af7lv")]
+[node name="GameWorld" parent="." node_paths=PackedStringArray("UI_Dead") instance=ExtResource("1_af7lv")]
 position = Vector2(-53, -7)
+UI_Dead = NodePath("../CanvasLayer/PopUpDie")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -63,7 +64,7 @@ environment = SubResource("Environment_ijcg4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7xi5j")
-volume_db = -3.0
+volume_db = -12.0
 autoplay = true
 
 [node name="SFXAudioStreamPlayer" type="AudioStreamPlayer" parent="."]

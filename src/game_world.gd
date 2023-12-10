@@ -23,6 +23,7 @@ func _ready():
 	GlobalSignal.switch_triggered.connect(
 		func () :
 			switch_triggered = true
+			GlobalSignal.play_audio.emit(preload('res://assets/audios/540321__colorscrimsontears__system-shutdown.wav'))
 	)
 	player.health.dead.connect(reset_loop)
 
@@ -33,7 +34,7 @@ func spawn_player():
 
 
 func reset_loop():
-	if (switch_triggered) :
+	if (switch_triggered):
 		UI_Dead.show()
 		return
 	iteration+=1
