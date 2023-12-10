@@ -1180,7 +1180,7 @@ max_rotation = 220.0
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" parent="." instance=ExtResource("19_5os4t")]
-position = Vector2(-481, 474)
+position = Vector2(-448, 510)
 
 [node name="InfoCamDecorations" type="Node2D" parent="."]
 
