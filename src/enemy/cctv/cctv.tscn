@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtixyf24bjjg8"]
+[gd_scene load_steps=5 format=3 uid="uid://dtixyf24bjjg8"]
 
 [ext_resource type="Script" path="res://src/enemy/cctv/cctv.gd" id="1_2tiow"]
 [ext_resource type="Texture2D" uid="uid://c2osoniwraj4q" path="res://assets/images/particles/cctv_light.png" id="1_ivlxu"]
 [ext_resource type="Script" path="res://src/enemy/cctv/big_laser.gd" id="3_0blh0"]
+[ext_resource type="AudioStream" uid="uid://dtuflrawfgavj" path="res://assets/audios/413057__matrixxx__retro-laser-shot-01.wav" id="4_3gpn2"]
 
 [node name="CCTV" type="Node2D" node_paths=PackedStringArray("laser")]
 script = ExtResource("1_2tiow")
@@ -36,6 +37,9 @@ points = PackedVector2Array(0, 0, 0, 0)
 width = 0.0
 default_color = Color(2, 0, 1, 1)
 end_cap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3gpn2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

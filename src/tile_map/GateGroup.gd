@@ -17,6 +17,7 @@ func set_gate_active(value):
 
 func open_password_gate():
 	if (id == 1):
+		GlobalSignal.play_audio.emit(preload("res://assets/audios/339632__nichols8917__door-closing.wav"))
 		var list_gate = get_children()
 		for i in list_gate:
 			i.set_active(false)

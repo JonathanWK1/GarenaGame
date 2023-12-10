@@ -3,6 +3,7 @@ extends Node2D
 
 @export var player: Player
 @export var laser: BigLaser
+@export var laser_audio: AudioStreamPlayer
 @export var rotation_speed := 30.0
 @export var min_rotation := -45.0
 @export var max_rotation := 45.0
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	if player_inside and player.velocity.length() > 0.01:
 		player.health.hp = 0
 		laser.target_position = laser.to_local(player.global_position).normalized() * 2000.0
+		laser_audio.play()
 		laser.is_casting = true
 		await get_tree().create_timer(0.3).timeout
 		laser.is_casting = false

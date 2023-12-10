@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp8jhhw4xscxg"]
+[gd_scene load_steps=8 format=3 uid="uid://bp8jhhw4xscxg"]
 
 [ext_resource type="Script" path="res://src/speaker/switch.gd" id="1_4yvj6"]
 [ext_resource type="Texture2D" uid="uid://toctilhxufyo" path="res://assets/images/Tilemap/table.png" id="2_20tvt"]
 [ext_resource type="Texture2D" uid="uid://cispqcnlgty5r" path="res://assets/images/Tilemap/computer.png" id="3_bc3it"]
+[ext_resource type="Texture2D" uid="uid://8sqiq43vkj5j" path="res://assets/images/GUI/nine_patch.png" id="4_qjyd8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1oui"]
 size = Vector2(127, 128)
@@ -10,6 +11,13 @@ size = Vector2(127, 128)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_us4go"]
 radius = 102.0
 height = 316.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xnmrj"]
+texture = ExtResource("4_qjyd8")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
 
 [node name="switch" type="StaticBody2D"]
 script = ExtResource("1_4yvj6")
@@ -40,7 +48,16 @@ offset_left = -214.0
 offset_top = -282.0
 offset_right = 216.0
 offset_bottom = -104.0
-color = Color(0.447059, 0.447059, 0.447059, 1)
+color = Color(1, 1, 1, 0)
+
+[node name="Panel" type="Panel" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xnmrj")
 
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 1

@@ -91,6 +91,7 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 
 #region Attack State
 func _on_attack_state_entered() -> void:
+	$SlashAudioStreamPlayer.play()
 	slash_sprites[attack_combo].show()
 	animator.play_8_way_anim('first_attack' if attack_combo == 0 else 'second_attack', Vector2.RIGHT.rotated(weapon_rotation))
 	weapon_pivot.rotation = weapon_rotation
@@ -134,7 +135,8 @@ func _on_dash_state_entered() -> void:
 	can_dash = false
 	animator.play_8_way_anim('dash', direction)
 	velocity = direction.normalized() * dash_speed
-	trail_manager.summon_trail(6, 0.3)
+	await get_tree().create_timer(0.05).timeout
+	trail_manager.summon_trail(5, 0.3)
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
@@ -194,6 +196,10 @@ func _on_hurt_box_attack_detected(attack_position: Vector2) -> void:
 	state_chart.send_event('hurt')
 	sprite_shader.set_shader_parameter('flash_modifier', 1.0)
 	GlobalEffects.freeze_frame(0.5)
+	if health.hp > 1:
+		$HurtAudioStreamPlayer.play()
+	else:
+		$DeadAudioStreamPlayer.play()
 	health.hp -= 1
 	await get_tree().create_timer(0.05).timeout
 	sprite_shader.set_shader_parameter('flash_modifier', 0.0)

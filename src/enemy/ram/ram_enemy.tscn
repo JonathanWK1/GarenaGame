@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://binqsx11r7f0n"]
+[gd_scene load_steps=40 format=3 uid="uid://binqsx11r7f0n"]
 
 [ext_resource type="Script" path="res://src/enemy/ram/ram_enemy.gd" id="1_02sjg"]
 [ext_resource type="Script" path="res://src/player/sprite_manager.gd" id="2_cbvfo"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://khae5ar855h2" path="res://assets/images/particles/ram_charge.png" id="7_eekoi"]
 [ext_resource type="Texture2D" uid="uid://c4yhcrc66y0wr" path="res://assets/images/particles/white.png" id="8_falhe"]
 [ext_resource type="Texture2D" uid="uid://bba358h7r7145" path="res://assets/images/particles/stunned_star.png" id="9_j5ys0"]
+[ext_resource type="AudioStream" uid="uid://tefagixh7d23" path="res://assets/audios/619067__mrrap4food__horse-galloping.wav" id="14_68fxb"]
+[ext_resource type="AudioStream" uid="uid://6q18pll7gg10" path="res://assets/audios/538697__brunoauzet__horse-snort.wav" id="14_sk0yx"]
+[ext_resource type="AudioStream" uid="uid://c7rekmu2mxx48" path="res://assets/audios/rock-smash-2.wav" id="16_6ljah"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_64haw"]
 particle_flag_disable_z = true
@@ -1059,7 +1062,8 @@ _data = {
 "walk_W": SubResource("Animation_dyquv")
 }
 
-[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "hitbox", "dust_particle", "charge_particle", "charge_sprite", "label")]
+[node name="RamEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animator", "hitbox", "dust_particle", "charge_particle", "charge_sprite", "charge_audio", "ram_audio", "collided_audio", "label")]
+collision_layer = 32
 motion_mode = 1
 script = ExtResource("1_02sjg")
 sprite_shader = ExtResource("4_q5j6d")
@@ -1069,9 +1073,13 @@ hitbox = NodePath("HitBox")
 dust_particle = NodePath("DustParticle")
 charge_particle = NodePath("Pivot/ChargeParticle")
 charge_sprite = NodePath("Pivot/ChargeSprite2D")
+charge_audio = NodePath("ChargeAudioStreamPlayer")
+ram_audio = NodePath("RamAudioStreamPlayer")
+collided_audio = NodePath("CollidedAudioStreamPlayer")
 label = NodePath("HealthLabel")
 
 [node name="HealthLabel" type="Label" parent="."]
+visible = false
 offset_left = -101.0
 offset_top = -134.0
 offset_right = 99.0
@@ -1185,6 +1193,15 @@ animation_player = NodePath("../AnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_viykv")
 }
+
+[node name="ChargeAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_sk0yx")
+
+[node name="RamAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_68fxb")
+
+[node name="CollidedAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_6ljah")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_vnsqh")

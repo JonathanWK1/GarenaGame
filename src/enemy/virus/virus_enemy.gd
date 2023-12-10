@@ -7,6 +7,8 @@ extends Enemy
 
 @export var state_chart: StateChart
 @export var animation_player: AnimationPlayer
+@export var shoot_audio: AudioStreamPlayer
+@export var charge_audio: AudioStreamPlayer
 
 @export var idle_speed := 50.0
 
@@ -21,6 +23,7 @@ func shoot() -> void:
 	get_parent().call_deferred("add_child", bullet)
 	bullet.set_deferred('global_position', global_position)
 	bullet.initialize(global_position.angle_to_point(target.global_position))
+	shoot_audio.play()
 
 
 #region Idle State
