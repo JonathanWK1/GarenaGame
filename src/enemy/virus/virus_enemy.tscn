@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxkecsk5q42bs"]
+[gd_scene load_steps=21 format=3 uid="uid://dxkecsk5q42bs"]
 
 [ext_resource type="Script" path="res://src/enemy/virus/virus_enemy.gd" id="1_0hmri"]
 [ext_resource type="PackedScene" uid="uid://dqcx3icn3q23o" path="res://src/enemy/virus/virus_bullet.tscn" id="2_okamn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_njftb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_54bol"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_d2fke"]
+[ext_resource type="AudioStream" uid="uid://dv3neo1uxjeuy" path="res://assets/audios/414888__matrixxx__retro-laser-shot-04.wav" id="13_jeu0a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tfhoi"]
 radius = 16.0
@@ -113,7 +114,7 @@ scale_max = 0.5
 color = Color(0.780392, 0.780392, 1, 1)
 hue_variation_max = 0.2
 
-[node name="VirusEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player")]
+[node name="VirusEnemy" type="CharacterBody2D" node_paths=PackedStringArray("state_chart", "animation_player", "shoot_audio")]
 collision_layer = 32
 collision_mask = 33
 motion_mode = 1
@@ -122,6 +123,7 @@ sprite_shader = ExtResource("4_yy003")
 bullet_scn = ExtResource("2_okamn")
 state_chart = NodePath("StateChart")
 animation_player = NodePath("AnimationPlayer")
+shoot_audio = NodePath("AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("4_7b1ii")
@@ -191,6 +193,9 @@ script = ExtResource("7_54bol")
 script = ExtResource("8_d2fke")
 to = NodePath("../../Idle")
 delay_seconds = 2.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jeu0a")
 
 [connection signal="attack_detected" from="HurtBox" to="." method="_on_hurt_box_attack_detected"]
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]

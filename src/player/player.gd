@@ -91,6 +91,7 @@ func _on_normal_state_physics_processing(delta: float) -> void:
 
 #region Attack State
 func _on_attack_state_entered() -> void:
+	$SlashAudioStreamPlayer.play()
 	slash_sprites[attack_combo].show()
 	animator.play_8_way_anim('first_attack' if attack_combo == 0 else 'second_attack', Vector2.RIGHT.rotated(weapon_rotation))
 	weapon_pivot.rotation = weapon_rotation
