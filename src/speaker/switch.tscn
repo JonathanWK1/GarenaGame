@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bp8jhhw4xscxg"]
+
+[ext_resource type="Script" path="res://src/speaker/switch.gd" id="1_4yvj6"]
+[ext_resource type="Texture2D" uid="uid://dp203c8qjow6h" path="res://icon.svg" id="2_dwt8q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1oui"]
+size = Vector2(127, 128)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_us4go"]
+radius = 102.0
+height = 316.0
+
+[node name="switch" type="StaticBody2D"]
+script = ExtResource("1_4yvj6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dwt8q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 1)
+shape = SubResource("RectangleShape2D_x1oui")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_us4go")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -121.0
+offset_top = -282.0
+offset_right = 123.0
+offset_bottom = -143.0
+color = Color(0.447059, 0.447059, 0.447059, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press F to turn of the switch"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

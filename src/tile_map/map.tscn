@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://clb7w80cfl07h" path="res://assets/images/Tilemap/icon_warning.png" id="14_or6hr"]
 [ext_resource type="Texture2D" uid="uid://btnhyflueyytw" path="res://assets/images/Tilemap/icon_info.png" id="15_ars2r"]
 [ext_resource type="PackedScene" uid="uid://dtixyf24bjjg8" path="res://src/enemy/cctv/cctv.tscn" id="15_k2i5s"]
+[ext_resource type="PackedScene" uid="uid://bp8jhhw4xscxg" path="res://src/speaker/switch.tscn" id="19_5os4t"]
 [ext_resource type="Texture2D" uid="uid://toctilhxufyo" path="res://assets/images/Tilemap/table.png" id="20_r0d3m"]
 [ext_resource type="Texture2D" uid="uid://5t6sktvky5tl" path="res://assets/images/Tilemap/paper.png" id="21_trmyk"]
 [ext_resource type="Texture2D" uid="uid://cispqcnlgty5r" path="res://assets/images/Tilemap/computer.png" id="22_8elu7"]
@@ -692,7 +693,7 @@ position = Vector2(0, 2)
 script = ExtResource("1_wrior")
 
 [node name="SpawnPosition" type="Marker2D" parent="."]
-position = Vector2(968, 589)
+position = Vector2(963, 591)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2opqv")
@@ -1087,15 +1088,19 @@ script = ExtResource("12_s6q6h")
 
 [node name="Gate3" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, -35)
+is_active = true
 
 [node name="Gate4" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(-102, 29)
+is_active = true
 
 [node name="Gate" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(90, -35)
+is_active = true
 
 [node name="Gate2" parent="GateContainer/GateGroup1" instance=ExtResource("11_o4p8k")]
 position = Vector2(90, 29)
+is_active = true
 
 [node name="CCTVContainer" type="Node2D" parent="."]
 position = Vector2(9932, 46)
@@ -1116,6 +1121,9 @@ scale = Vector2(1.5, 1.5)
 min_rotation = 50.0
 max_rotation = 220.0
 metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" parent="." instance=ExtResource("19_5os4t")]
+position = Vector2(-481, 474)
 
 [node name="InfoCamDecorations" type="Node2D" parent="."]
 
